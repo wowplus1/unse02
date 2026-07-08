@@ -4,6 +4,7 @@ import ProfileBar from "./components/ProfileBar";
 import ShareCard from "./components/ShareCard";
 import CaptureShare from "./components/CaptureShare";
 import ExpandableText from "./components/ExpandableText";
+import DailyAdGate from "./components/DailyAdGate";
 import AdSlot from "./components/AdSlot";
 import { parseProfile, qs, AUTOFILL_MAP } from "../lib/profile";
 import { funToday } from "../lib/funtoday";
@@ -53,6 +54,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
 
   return (
     <>
+      <DailyAdGate />
       <section style={{ padding: "10px 2px 6px" }}>
         <div className="muted" style={{ fontSize: 13 }}>
           {ft.dateText} ({ft.weekday}) · 오늘의 운세

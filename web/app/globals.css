@@ -271,6 +271,35 @@ input:focus, select:focus { border-color: var(--accent); }
 .pill:hover { transform: translateY(-2px); }
 .pill.on { background: var(--grad-brand); color: #fff; border-color: transparent; }
 
+/* 하루 한 번 광고 게이트 */
+.adgate {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center; padding: 22px;
+  background: rgba(40, 28, 40, .5); backdrop-filter: blur(8px);
+}
+.adgate-card {
+  position: relative; width: 100%; max-width: 360px; text-align: center;
+  background: var(--card); border: 1px solid var(--line2); border-radius: 26px;
+  padding: 30px 22px 20px; box-shadow: var(--shadow-lg);
+}
+.adgate-card .badge {
+  position: absolute; top: 14px; left: 16px;
+  background: var(--accent); color: #fff; font-size: 10px; font-weight: 800;
+  padding: 3px 9px; border-radius: 999px; letter-spacing: .04em;
+}
+.adgate-teaser {
+  margin: 14px 0 18px; padding: 12px; border-radius: 14px;
+  background: var(--soft); color: var(--muted); font-size: 13px;
+  filter: blur(0.4px);
+}
+.adgate-teaser b { color: var(--accent-ink); filter: blur(3px); }
+.adgate-skip {
+  display: block; margin: 10px auto 0; background: none; border: none;
+  color: var(--muted); font-size: 12.5px; text-decoration: underline; cursor: pointer;
+}
+.adgate-disc { font-size: 10.5px; color: var(--muted); line-height: 1.5; margin: 16px 0 0; }
+.adgate-brand { font-size: 11px; color: var(--muted); font-weight: 700; margin: 8px 0 0; }
+
 /* 랭킹 행 */
 .rankrow { display: flex; align-items: center; gap: 10px; padding: 11px 10px; border: 1px solid var(--line2); border-radius: 14px; margin-bottom: 7px; }
 .rankrow .rk { width: 26px; text-align: center; font-weight: 800; font-size: 15px; flex: none; }
