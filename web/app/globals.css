@@ -271,6 +271,19 @@ input:focus, select:focus { border-color: var(--accent); }
 .pill:hover { transform: translateY(-2px); }
 .pill.on { background: var(--grad-brand); color: #fff; border-color: transparent; }
 
+/* 캡처 이미지 미리보기 모달 */
+.cap-modal {
+  position: fixed; inset: 0; z-index: 210;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  background: rgba(40, 28, 40, .62); backdrop-filter: blur(6px);
+}
+.cap-inner {
+  width: 100%; max-width: 380px; max-height: 90vh; overflow-y: auto;
+  background: var(--card); border-radius: 22px; padding: 16px; box-shadow: var(--shadow-lg);
+}
+.cap-inner img { display: block; width: 100%; height: auto; border-radius: 16px; }
+.cap-tip { font-size: 12.5px; color: var(--muted); text-align: center; margin: 12px 0 6px; }
+
 /* 하루 한 번 광고 게이트 */
 .adgate {
   position: fixed; inset: 0; z-index: 200;
