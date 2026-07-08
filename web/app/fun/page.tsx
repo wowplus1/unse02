@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AdSlot from "../components/AdSlot";
 import AutoFill from "../components/AutoFill";
 import ProfileBar from "../components/ProfileBar";
@@ -25,11 +26,11 @@ export default async function FunHub({ searchParams }: { searchParams: Promise<R
       <ProfileBar />
       <div className="grid" style={{ marginTop: 14 }}>
         {FUN.map((f) => (
-          <a className="card" key={f.href} href={f.needP && q ? `${f.href}?${q}` : f.href}>
+          <Link className="card" key={f.href} href={f.needP && q ? `${f.href}?${q}` : f.href} prefetch>
             <div className="ico">{f.ico}</div>
             <div className="t">{f.name}</div>
             <div className="d">{f.d}</div>
-          </a>
+          </Link>
         ))}
       </div>
       <AdSlot />

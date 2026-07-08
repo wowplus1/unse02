@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AutoFill from "./components/AutoFill";
 import ProfileForm from "./components/ProfileForm";
 import ProfileBar from "./components/ProfileBar";
@@ -126,12 +127,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       {/* 더 보기 (가벼운 것만) */}
       <div className="sec">🎉 더 즐기기</div>
       <div className="grid">
-        <a className="card" href={`/ranking?${q}`}>
+        <Link className="card" href={`/ranking?${q}`} prefetch>
           <div className="ico">🏆</div><div className="t">오늘의 랭킹</div><div className="d">띠·별자리 순위</div>
-        </a>
-        <a className="card" href="/fun">
+        </Link>
+        <Link className="card" href={`/fun?${q}`} prefetch>
           <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
-        </a>
+        </Link>
       </div>
 
       <AdSlot />

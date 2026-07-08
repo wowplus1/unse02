@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import BottomNav from "./components/BottomNav";
 import ThemeToggle from "./components/ThemeToggle";
+import PageTransition from "./components/PageTransition";
 import { BRAND } from "../lib/brand";
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </a>
             <ThemeToggle />
           </header>
-          {children}
+          <PageTransition>{children}</PageTransition>
         </div>
         <BottomNav />
       </body>
