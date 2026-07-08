@@ -1,93 +1,101 @@
-/* unse02 — 밝고 친근한 디자인 시스템 (파스텔·둥근 카드·부드러운 그림자) */
+/* unse02 — 점신풍 미스틱 디자인 (라이트 + 보라/금색 포인트, 둥근 카드) */
 :root {
   /* 배경/표면 */
-  --bg: #fff7f2;
-  --bg2: #fdeef4;
+  --bg: #f6f4ff;
+  --bg2: #efeaff;
   --card: #ffffff;
-  --card-soft: #fff4f6;
-  --soft: #fff1ec;        /* 칩/인풋/아이템 배경 */
-  --soft2: #ffe9ef;
-  --line: #ffe0e0;
-  --line2: #f2e6ee;
+  --card-soft: #faf8ff;
+  --soft: #f1edff;        /* 칩/인풋/아이템 배경 */
+  --soft2: #e9e3ff;
+  --line: #e6ddff;
+  --line2: #ece7f9;
 
   /* 텍스트 */
-  --text: #38303a;
-  --muted: #9a8b95;
+  --text: #2a2340;
+  --muted: #8b83a8;
 
-  /* 브랜드 컬러 — 코랄/피치 프라이머리 + 파스텔 서브 */
-  --accent: #ff6f91;       /* 코랄핑크 */
-  --accent-ink: #e14e73;
-  --accent-soft: #ffe3ea;
-  --peach: #ffb37a;
-  --peach-soft: #ffe9d6;
-  --mint: #46cfa8;
-  --mint-soft: #d8f6ec;
-  --sky: #5fb2ff;
-  --sky-soft: #d9edff;
+  /* 브랜드 컬러 — 보라 프라이머리 + 금색 세컨더리 */
+  --accent: #7b5cff;       /* 보라 */
+  --accent-ink: #5f3fe0;   /* 진보라 (텍스트/링크) */
+  --accent-soft: #ece7ff;
+  --gold: #e0a92e;         /* 금색 포인트 */
+  --gold-ink: #b9851f;
+  --gold-soft: #fbf1d6;
+  --peach: #c9a7ff;
+  --peach-soft: #efe6ff;
+  --mint: #2fb894;
+  --mint-soft: #dff5ee;
+  --sky: #5a8cff;
+  --sky-soft: #e2ebff;
   --lavender: #a98bff;
   --lavender-soft: #ece4ff;
-  --butter: #ffd45e;
-  --butter-soft: #fff2c9;
+  --butter: #e0a92e;
+  --butter-soft: #fbf1d6;
   --good: #23b47e;
-  --warn: #f0913f;
+  --warn: #e0913f;
 
   /* 오행 컬러 */
-  --oh-mok: #46cfa8;   /* 목 초록 */
+  --oh-mok: #2fb894;   /* 목 초록 */
   --oh-hwa: #ff6f91;   /* 화 빨강 */
-  --oh-to: #ffc24d;    /* 토 노랑 */
+  --oh-to: #e0a92e;    /* 토 금 */
   --oh-geum: #b9c2cc;  /* 금 은회 */
-  --oh-su: #5fb2ff;    /* 수 파랑 */
+  --oh-su: #5a8cff;    /* 수 파랑 */
 
   /* 모양 */
   --r: 24px;
   --r-md: 18px;
   --r-sm: 13px;
-  --shadow: 0 2px 6px rgba(226,120,150,.06), 0 10px 26px rgba(226,120,150,.08);
-  --shadow-lg: 0 14px 40px rgba(226,120,150,.18);
-  --grad-brand: linear-gradient(135deg, #ff8fab, #ff6f91 55%, #ff9e7a);
-  --grad-soft: linear-gradient(135deg, #fff0f4, #ffe9df);
+  --shadow: 0 2px 6px rgba(90,63,224,.06), 0 10px 26px rgba(90,63,224,.10);
+  --shadow-lg: 0 14px 40px rgba(90,63,224,.20);
+  --grad-brand: linear-gradient(135deg, #9a7bff, #7b5cff 55%, #6a4bff);
+  --grad-soft: linear-gradient(135deg, #f1edff, #efe6ff);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #221a20;
-    --bg2: #2a1f28;
-    --card: #2e2530;
-    --card-soft: #352a37;
-    --soft: #362b38;
-    --soft2: #3d2f3f;
-    --line: #43354420;
-    --line2: #493a4a;
-    --text: #f4ecf1;
-    --muted: #b3a1ac;
-    --accent: #ff8fab;
-    --accent-ink: #ffb3c6;
-    --accent-soft: #4a2f3c;
-    --peach-soft: #4a382a;
-    --mint-soft: #22443c;
-    --sky-soft: #23384c;
-    --lavender-soft: #322a4a;
-    --butter-soft: #4a4023;
-    --shadow: 0 2px 6px rgba(0,0,0,.25), 0 10px 26px rgba(0,0,0,.30);
-    --shadow-lg: 0 14px 40px rgba(0,0,0,.45);
-    --grad-soft: linear-gradient(135deg, #3a2a33, #3a3028);
+    --bg: #12102a;
+    --bg2: #1a1640;
+    --card: #201c44;
+    --card-soft: #262052;
+    --soft: #262052;
+    --soft2: #2e2860;
+    --line: #332c66;
+    --line2: #38316b;
+    --text: #efeafc;
+    --muted: #a99fce;
+    --accent: #b9a7ff;
+    --accent-ink: #cbb9ff;
+    --accent-soft: #2e2660;
+    --gold: #f4c95d; --gold-ink: #f4c95d; --gold-soft: #3a3016;
+    --peach-soft: #2e2660;
+    --mint-soft: #143a34;
+    --sky-soft: #1c2c50;
+    --lavender-soft: #2a2458;
+    --butter-soft: #3a3016;
+    --shadow: 0 2px 6px rgba(0,0,0,.3), 0 10px 26px rgba(0,0,0,.4);
+    --shadow-lg: 0 14px 40px rgba(0,0,0,.55);
+    --grad-soft: linear-gradient(135deg, #262052, #2a2458);
   }
 }
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #221a20; --bg2: #2a1f28; --card: #2e2530; --card-soft: #352a37;
-  --soft: #362b38; --soft2: #3d2f3f; --line: #433544; --line2: #493a4a;
-  --text: #f4ecf1; --muted: #b3a1ac; --accent: #ff8fab; --accent-ink: #ffb3c6;
-  --accent-soft: #4a2f3c; --shadow-lg: 0 14px 40px rgba(0,0,0,.45);
+  --bg: #12102a; --bg2: #1a1640; --card: #201c44; --card-soft: #262052;
+  --soft: #262052; --soft2: #2e2860; --line: #332c66; --line2: #38316b;
+  --text: #efeafc; --muted: #a99fce; --accent: #b9a7ff; --accent-ink: #cbb9ff;
+  --accent-soft: #2e2660; --gold: #f4c95d; --gold-ink: #f4c95d; --gold-soft: #3a3016;
+  --peach-soft: #2e2660; --mint-soft: #143a34; --sky-soft: #1c2c50;
+  --lavender-soft: #2a2458; --butter-soft: #3a3016;
+  --shadow-lg: 0 14px 40px rgba(0,0,0,.55);
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
   background:
-    radial-gradient(720px 420px at 100% -8%, var(--accent-soft) 0%, rgba(255,227,234,0) 60%),
-    radial-gradient(640px 380px at -5% 2%, var(--sky-soft) 0%, rgba(217,237,255,0) 55%),
+    radial-gradient(760px 440px at 100% -10%, var(--accent-soft) 0%, transparent 60%),
+    radial-gradient(560px 340px at 0% 0%, var(--gold-soft) 0%, transparent 55%),
+    radial-gradient(680px 400px at 50% 120%, var(--lavender-soft) 0%, transparent 60%),
     var(--bg);
   color: var(--text);
   font-family: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
@@ -140,7 +148,8 @@ a.card:active { transform: translateY(-1px); }
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
 /* 섹션 헤더 */
-.sec { font-weight: 800; font-size: 16px; margin: 26px 4px 12px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 7px; }
+.sec { font-weight: 800; font-size: 16px; margin: 26px 4px 12px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+.sec::before { content: ""; width: 4px; height: 15px; border-radius: 2px; background: linear-gradient(var(--gold), var(--accent)); flex: none; }
 .sec small { color: var(--muted); font-weight: 600; font-size: 12px; }
 
 /* 칩 */
