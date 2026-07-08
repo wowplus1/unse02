@@ -3,14 +3,6 @@
 import type { FunToday } from "../../lib/funtoday";
 import { BRAND } from "../../lib/brand";
 
-const GRAD: Record<string, string> = {
-  최고: "linear-gradient(150deg,#ff8fab,#ff6f91 55%,#ffa26b)",
-  좋음: "linear-gradient(150deg,#ffa26b,#ff8fab 60%,#ffcaa0)",
-  무난: "linear-gradient(150deg,#7cc6ff,#8f9bff 60%,#b79cff)",
-  주의: "linear-gradient(150deg,#5fd0b0,#57b8e0 60%,#7cc6ff)",
-  휴식: "linear-gradient(150deg,#8a86b8,#6f6aa0 60%,#a58fd8)",
-};
-
 function MiniStat({ emoji, label, score }: { emoji: string; label: string; score: number }) {
   return (
     <div style={{ flex: 1, background: "rgba(255,255,255,.18)", borderRadius: 16, padding: "11px 8px", textAlign: "center" }}>
@@ -22,7 +14,7 @@ function MiniStat({ emoji, label, score }: { emoji: string; label: string; score
 }
 
 export default function ShareCard({ data, name, id = "share-card" }: { data: FunToday; name?: string; id?: string }) {
-  const bg = GRAD[data.tone] || GRAD["무난"];
+  const bg = data.grad;
   return (
     <div
       id={id}
