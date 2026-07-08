@@ -3,6 +3,7 @@ import { julianOf } from "../../../lib/tojeong";
 import AutoFill from "../../components/AutoFill";
 import ProfileBar from "../../components/ProfileBar";
 import ShareButtons from "../../components/ShareButtons";
+import AdSlot from "../../components/AdSlot";
 
 export const dynamic = "force-dynamic";
 
@@ -61,6 +62,7 @@ export default async function LottoPage({ searchParams }: { searchParams: Promis
         </form>
       </div>
       {result}
+      <AdSlot />
     </>
   );
 }

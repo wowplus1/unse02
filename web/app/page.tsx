@@ -131,6 +131,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
         </a>
       </div>
+
+      <AdSlot />
     </>
   );
 }
