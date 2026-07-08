@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:/Users/조지수/Desktop/unse01\" && echo \"=== README ===\" && cat README.md && echo \"\" && echo \"=== TREE \\(2 levels\\) ===\" && find . -maxdepth 2 -not -path './.git/*' -not -path './node_modules/*' | sort)"
+    ]
+  }
+}
