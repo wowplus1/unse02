@@ -8,8 +8,8 @@ export default defineConfig({
     host: '192.168.0.73',
     port: 3939,
     commands: {
-      // 실기기에서 접속하려면 --host 로 외부 바인딩
-      dev: 'rsbuild dev --host 0.0.0.0',
+      // 실기기에서 접속하려면 --host 로 외부 바인딩 + 포트를 web.port(3939)와 일치
+      dev: 'rsbuild dev --host 0.0.0.0 --port 3939',
       build: 'rsbuild build',
     },
   },
