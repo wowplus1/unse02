@@ -1,7 +1,7 @@
 import { defineConfig } from '@apps-in-toss/web-framework/config';
 
 export default defineConfig({
-  appName: 'oneul-unse',
+  appName: 'unse4u',
   web: {
     // 실기(폰) 테스트: 내 PC의 같은 Wi-Fi IP로 교체하세요.
     // (터미널에서 rsbuild가 출력하는 Network 주소, 또는 ipconfig의 IPv4 주소)
@@ -16,7 +16,7 @@ export default defineConfig({
   permissions: [],
   outdir: 'dist',
   brand: {
-    displayName: '오늘운세',
+    displayName: '인생역점',
     // TODO: 앱인토스 콘솔에 업로드한 실제 아이콘 URL로 교체
     icon: 'https://static.toss.im/appsintoss/73/10550764-5ac1-44e2-9ff3-ad78d8d2e71a.png',
     primaryColor: '#7b5cff',
