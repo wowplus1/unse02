@@ -3,10 +3,13 @@ import { defineConfig } from '@apps-in-toss/web-framework/config';
 export default defineConfig({
   appName: 'oneul-unse',
   web: {
-    host: 'localhost',
+    // 실기(폰) 테스트: 내 PC의 같은 Wi-Fi IP로 교체하세요.
+    // (터미널에서 rsbuild가 출력하는 Network 주소, 또는 ipconfig의 IPv4 주소)
+    host: '192.168.0.73',
     port: 3939,
     commands: {
-      dev: 'rsbuild dev',
+      // 실기기에서 접속하려면 --host 로 외부 바인딩
+      dev: 'rsbuild dev --host 0.0.0.0',
       build: 'rsbuild build',
     },
   },
