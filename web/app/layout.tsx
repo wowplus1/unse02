@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import BottomNav from "./components/BottomNav";
 import ThemeToggle from "./components/ThemeToggle";
 import PageTransition from "./components/PageTransition";
 import { BRAND } from "../lib/brand";
@@ -32,7 +31,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </header>
           <PageTransition>{children}</PageTransition>
         </div>
-        <BottomNav />
       </body>
     </html>
   );
