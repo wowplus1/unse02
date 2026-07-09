@@ -5,7 +5,7 @@ import ProfileBar from "../components/ProfileBar";
 import ShareCard from "../components/ShareCard";
 import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
-import RewardGate from "../components/RewardGate";
+import RewardCard from "../components/RewardCard";
 import { getPoints } from "../lib/points";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
@@ -15,8 +15,6 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
   const [points, setPoints] = useState(() => getPoints());
   return (
     <>
-      <RewardGate onUnlock={(p) => setPoints(p)} />
-
       <section style={{ padding: "10px 2px 6px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div className="muted" style={{ fontSize: 13 }}>{ft.dateText} ({ft.weekday}) · 오늘의 운세</div>
@@ -28,6 +26,8 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       </section>
 
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
+
+      <div style={{ marginTop: 12 }}><RewardCard onEarn={(p) => setPoints(p)} /></div>
 
       <div style={{ marginTop: 14 }}><ShareCard data={ft} name={profile.name} /></div>
       <div style={{ marginTop: 12 }}><CaptureShare /></div>
