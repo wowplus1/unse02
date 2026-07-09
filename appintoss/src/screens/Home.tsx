@@ -1,18 +1,27 @@
+import { useState } from "react";
 import type { Profile, View } from "../lib/appTypes";
 import { funToday } from "../lib/funtoday";
 import ProfileBar from "../components/ProfileBar";
 import ShareCard from "../components/ShareCard";
 import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
+import RewardGate from "../components/RewardGate";
+import { getPoints } from "../lib/points";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
   profile: Profile; onEdit: () => void; onDelete: () => void; onNavigate: (v: View) => void;
 }) {
   const ft = funToday(profile);
+  const [points, setPoints] = useState(() => getPoints());
   return (
     <>
+      <RewardGate onUnlock={(p) => setPoints(p)} />
+
       <section style={{ padding: "10px 2px 6px" }}>
-        <div className="muted" style={{ fontSize: 13 }}>{ft.dateText} ({ft.weekday}) · 오늘의 운세</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div className="muted" style={{ fontSize: 13 }}>{ft.dateText} ({ft.weekday}) · 오늘의 운세</div>
+          <span className="chip" style={{ fontWeight: 700 }}>🪙 {points.toLocaleString()}P</span>
+        </div>
         <h2 style={{ fontSize: 22, margin: "4px 0 0", letterSpacing: "-0.03em", fontWeight: 800 }}>
           {ft.emoji} 오늘은 <span style={{ color: "var(--accent-ink)" }}>{ft.keyword}</span>
         </h2>
