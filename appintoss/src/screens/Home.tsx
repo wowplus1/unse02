@@ -5,15 +5,17 @@ import ProfileBar from "../components/ProfileBar";
 import ShareCard from "../components/ShareCard";
 import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
-import RewardCard from "../components/RewardCard";
+import UnlockGate from "../components/UnlockGate";
 import BannerAd from "../components/BannerAd";
 import { getPoints } from "../lib/points";
+import { isUnlockedToday } from "../lib/unlock";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
   profile: Profile; onEdit: () => void; onDelete: () => void; onNavigate: (v: View) => void;
 }) {
   const ft = funToday(profile);
   const [points, setPoints] = useState(() => getPoints());
+  const [unlocked, setUnlocked] = useState(() => isUnlockedToday());
   return (
     <>
       <section style={{ padding: "10px 2px 6px" }}>
@@ -28,7 +30,19 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
 
-      <div style={{ marginTop: 12 }}><RewardCard onEarn={(p) => setPoints(p)} /></div>
+      {!unlocked ? (
+        <div style={{ marginTop: 12 }}>
+          <UnlockGate onUnlock={(p) => { setPoints(p); setUnlocked(true); }} />
+        </div>
+      ) : (
+        <div className="card" style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10, background: "var(--soft)", border: "1px solid var(--line2)" }}>
+          <span style={{ fontSize: 20 }}>✅</span>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: 14 }}>오늘 운세 전체 열림</div>
+            <div className="muted" style={{ fontSize: 12 }}>상세 풀이·더보기까지 모두 확인할 수 있어요</div>
+          </div>
+        </div>
+      )}
 
       <div style={{ marginTop: 14 }}><ShareCard data={ft} name={profile.name} /></div>
       <div style={{ marginTop: 12 }}><CaptureShare /></div>
@@ -42,12 +56,15 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
               <span className="score">{c.score}점</span>
             </div>
             <div className="bar" style={{ margin: "2px 0 8px" }}><div className="fill" style={{ width: `${c.score}%` }} /></div>
-            {c.full && <ExpandableText text={c.full} />}
+            {c.full && (unlocked
+              ? <ExpandableText text={c.full} />
+              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span style={{ color: "var(--accent-ink)", fontWeight: 700 }}>🔒 상세 풀이는 리워드로</span></div>
+            )}
           </div>
         ))}
       </div>
 
-      {ft.more.length > 0 && (
+      {ft.more.length > 0 && (unlocked ? (
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
           <div className="reading">
@@ -59,7 +76,14 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
             ))}
           </div>
         </>
-      )}
+      ) : (
+        <>
+          <div className="sec">📖 오늘의 운세 더보기</div>
+          <div className="card center muted" style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16 }}>
+            🔒 리워드 보고 <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b>까지 열어보세요
+          </div>
+        </>
+      ))}
 
       <div className="sec">🎁 오늘의 행운템</div>
       <div className="grid3">

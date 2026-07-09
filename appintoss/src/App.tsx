@@ -53,7 +53,7 @@ export default function App() {
         <section className="hero">
           <div className="ki">{BRAND.logo}</div>
           <h2>오늘 나의 운세는?</h2>
-          <p>생년월일 한 번이면 매일 점수로 확인하고 카드로 공유해요</p>
+          <p>생년월일 한 번이면 매일 운세 확인 · 리워드 보고 상세 풀이까지 모두 무료</p>
         </section>
         <ProfileForm onSave={saveProfile} />
         <div className="sec">✨ 이런 걸 매일 볼 수 있어요</div>
