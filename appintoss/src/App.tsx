@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Profile, PROFILE_KEY, View } from "./lib/appTypes";
 import { BRAND } from "./lib/brand";
-import BottomNav from "./components/BottomNav";
 import ProfileForm from "./components/ProfileForm";
 import Home from "./screens/Home";
 import Ranking from "./screens/Ranking";
@@ -70,8 +69,8 @@ export default function App() {
   } else {
     switch (view) {
       case "home": content = <Home profile={profile!} onEdit={onEdit} onDelete={deleteProfile} onNavigate={nav} />; break;
-      case "ranking": content = <Ranking profile={profile} onEdit={onEdit} onDelete={deleteProfile} />; break;
-      case "fun": content = <Fun onNavigate={nav} />; break;
+      case "ranking": content = <Ranking profile={profile} onEdit={onEdit} onDelete={deleteProfile} onBack={() => nav("home")} />; break;
+      case "fun": content = <Fun onNavigate={nav} onBack={() => nav("home")} />; break;
       case "lotto": content = <Lotto profile={profile} onBack={toFun} />; break;
       case "bio": content = <Bio profile={profile} onBack={toFun} />; break;
       case "name": content = <NameScreen onBack={toFun} />; break;
@@ -84,7 +83,6 @@ export default function App() {
     <div className="wrap">
       {/* 상단 헤더는 토스가 서비스 타이틀을 제공하므로 제거 */}
       <main key={editing ? "edit" : view} className="page">{content}</main>
-      <BottomNav view={view} onNavigate={nav} />
     </div>
   );
 }

@@ -139,7 +139,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* 레이아웃 */
-.wrap { max-width: 640px; margin: 0 auto; padding: 8px 16px 96px; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 8px 16px 40px; }
 
 /* 헤더 */
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 8px; }
