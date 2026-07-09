@@ -1,7 +1,6 @@
 import { nameCompat } from "../../../lib/fun";
 import ProfileBar from "../../components/ProfileBar";
 import ShareButtons from "../../components/ShareButtons";
-import AdSlot from "../../components/AdSlot";
 
 export const dynamic = "force-dynamic";
 
@@ -47,7 +46,6 @@ export default async function NamePage({ searchParams }: { searchParams: Promise
           <div className="note">※ 전통 한글 획수 방식의 재미 궁합입니다.</div>
         </div>
       )}
-      <AdSlot />
     </>
   );
 }

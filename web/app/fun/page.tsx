@@ -1,5 +1,4 @@
 import Link from "next/link";
-import AdSlot from "../components/AdSlot";
 import AutoFill from "../components/AutoFill";
 import ProfileBar from "../components/ProfileBar";
 import { parseProfile, qs, AUTOFILL_MAP } from "../../lib/profile";
@@ -33,7 +32,6 @@ export default async function FunHub({ searchParams }: { searchParams: Promise<R
           </Link>
         ))}
       </div>
-      <AdSlot />
     </>
   );
 }

@@ -2,7 +2,6 @@ import { biorhythm } from "../../../lib/fun";
 import AutoFill from "../../components/AutoFill";
 import ProfileBar from "../../components/ProfileBar";
 import ShareButtons from "../../components/ShareButtons";
-import AdSlot from "../../components/AdSlot";
 
 export const dynamic = "force-dynamic";
 
@@ -66,7 +65,6 @@ export default async function BioPage({ searchParams }: { searchParams: Promise<
         </form>
       </div>
       {result}
-      <AdSlot />
     </>
   );
 }

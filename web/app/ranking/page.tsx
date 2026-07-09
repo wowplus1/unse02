@@ -1,6 +1,5 @@
 import AutoFill from "../components/AutoFill";
 import ProfileBar from "../components/ProfileBar";
-import AdSlot from "../components/AdSlot";
 import { parseProfile, sajuFrom, AUTOFILL_MAP } from "../../lib/profile";
 import { ddiRanking, starRanking, RankRow } from "../../lib/funtoday";
 
@@ -66,7 +65,6 @@ export default async function RankingPage({ searchParams }: { searchParams: Prom
 
       {!parsed && <p className="center muted" style={{ fontSize: 12.5, marginTop: 12 }}>생년월일을 등록하면 내 띠·별자리를 하이라이트해 드려요</p>}
 
-      <AdSlot />
     </>
   );
 }

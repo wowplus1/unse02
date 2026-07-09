@@ -3,7 +3,6 @@ import { juyeokReadings, gangReading } from "../../lib/content";
 import { ReadingItem } from "../components/Reading";
 import ProfileBar from "../components/ProfileBar";
 import ShareButtons from "../components/ShareButtons";
-import AdSlot from "../components/AdSlot";
 
 export const dynamic = "force-dynamic"; // 매번 새로 뽑기
 
@@ -49,7 +48,6 @@ export default function JuyeokPage() {
         <a className="btn mt" href="/juyeok">🎲 다시 뽑기</a>
       </div>
 
-      <AdSlot />
 
       {gang && (
         <>

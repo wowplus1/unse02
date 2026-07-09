@@ -2,7 +2,6 @@ import GunghapForm from "./GunghapForm";
 import ProfileBar from "../components/ProfileBar";
 import { ReadingItem } from "../components/Reading";
 import ShareButtons from "../components/ShareButtons";
-import AdSlot from "../components/AdSlot";
 import { computeSaju } from "../../lib/saju";
 import { ohengGunghap, ttiFate } from "../../lib/content";
 
@@ -68,7 +67,6 @@ export default async function GunghapPage({ searchParams }: { searchParams: Prom
         {oheng ? <ReadingItem r={oheng} hi /> : <div className="item"><div className="b muted">해당 오행 조합 풀이를 찾지 못했습니다.</div></div>}
       </div>
 
-      <AdSlot />
 
       <div className="sec">🐾 각자의 띠 운명</div>
       <div className="reading">
