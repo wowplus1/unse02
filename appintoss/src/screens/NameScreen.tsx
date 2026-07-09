@@ -1,5 +1,7 @@
 import { useState } from "react";
 import BannerAd from "../components/BannerAd";
+import NameShareCard from "../components/NameShareCard";
+import CaptureShare from "../components/CaptureShare";
 import { nameCompat } from "../lib/fun";
 
 function verdict(s: number) {
@@ -29,13 +31,13 @@ export default function NameScreen({ onBack }: { onBack: () => void }) {
         <button className="btn" onClick={go}>이름 궁합 보기</button>
       </div>
       {res !== null && (
-        <div className="panel center" style={{ marginTop: 12 }}>
-          <div className="muted" style={{ fontSize: 15 }}>{a} ♥ {b}</div>
-          <div style={{ fontSize: 54, fontWeight: 900, color: "var(--accent)", margin: "6px 0" }}>{res}%</div>
-          <div className="bar" style={{ margin: "8px 0" }}><div className="fill" style={{ width: `${res}%` }} /></div>
-          <div style={{ fontWeight: 700, marginTop: 8 }}>{verdict(res)}</div>
+        <>
+          <div style={{ marginTop: 14 }}>
+            <NameShareCard a={a.trim()} b={b.trim()} score={res} verdict={verdict(res)} />
+          </div>
+          <div style={{ marginTop: 12 }}><CaptureShare targetId="name-share-card" fileName="이름궁합.png" /></div>
           <div className="note">※ 전통 한글 획수 방식의 재미 궁합입니다.</div>
-        </div>
+        </>
       )}
       <BannerAd />
     </>
