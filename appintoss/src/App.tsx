@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Profile, PROFILE_KEY, View } from "./lib/appTypes";
 import { BRAND } from "./lib/brand";
-import ThemeToggle from "./components/ThemeToggle";
 import BottomNav from "./components/BottomNav";
 import ProfileForm from "./components/ProfileForm";
 import Home from "./screens/Home";
@@ -83,16 +82,7 @@ export default function App() {
 
   return (
     <div className="wrap">
-      <header className="topbar">
-        <button className="brand" onClick={() => nav("home")} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-          <span className="logo">{BRAND.logo}</span>
-          <span style={{ textAlign: "left" }}>
-            <h1>{BRAND.name}</h1>
-            <small>{BRAND.tagline}</small>
-          </span>
-        </button>
-        <ThemeToggle />
-      </header>
+      {/* 상단 헤더는 토스가 서비스 타이틀을 제공하므로 제거 */}
       <main key={editing ? "edit" : view} className="page">{content}</main>
       <BottomNav view={view} onNavigate={nav} />
     </div>
