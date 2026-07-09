@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useRewardedAd } from "../hooks/useRewardedAd";
 import { addPoints } from "../lib/points";
 
@@ -30,8 +31,8 @@ export default function RewardGate({ onUnlock }: { onUnlock?: (points: number) =
     show({ onRewarded: grant, onDismiss: () => setBusy(false) });
   };
 
-  if (status === "open") return null;
-  return (
+  if (status === "open" || typeof document === "undefined") return null;
+  return createPortal(
     <div className="adgate">
       {status === "locked" && (
         <div className="adgate-card">
@@ -48,6 +49,7 @@ export default function RewardGate({ onUnlock }: { onUnlock?: (points: number) =
           <p className="adgate-disc">시청을 완료하면 포인트가 적립되고 오늘 운세가 열려요.</p>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
