@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BannerAd from "../components/BannerAd";
 import { computeSaju } from "../lib/saju";
 import { ohengGunghap, ttiFate } from "../lib/content";
 import { ReadingItem } from "../components/Reading";
@@ -71,6 +72,7 @@ export default function Gunghap({ onBack }: { onBack: () => void }) {
           <button className="btn" onClick={() => setShow(true)} disabled={!ready}>💞 궁합 보기</button>
         </>
       )}
+      <BannerAd />
     </>
   );
 }

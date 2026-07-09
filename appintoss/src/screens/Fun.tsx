@@ -1,4 +1,5 @@
 import type { View } from "../lib/appTypes";
+import BannerAd from "../components/BannerAd";
 
 const FUN: { v: View; ico: string; name: string; d: string }[] = [
   { v: "lotto", ico: "🔢", name: "행운의 번호", d: "오늘의 로또 6+보너스" },
@@ -25,6 +26,7 @@ export default function Fun({ onNavigate, onBack }: { onNavigate: (v: View) => v
           </button>
         ))}
       </div>
+      <BannerAd />
     </>
   );
 }

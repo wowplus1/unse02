@@ -6,6 +6,7 @@ import ShareCard from "../components/ShareCard";
 import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
 import RewardCard from "../components/RewardCard";
+import BannerAd from "../components/BannerAd";
 import { getPoints } from "../lib/points";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
@@ -85,6 +86,9 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
           <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
         </button>
       </div>
+
+      {/* 정책: 스크롤 화면 하단 배너 */}
+      <BannerAd />
     </>
   );
 }

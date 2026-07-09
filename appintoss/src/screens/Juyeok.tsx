@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import BannerAd from "../components/BannerAd";
 import { castHexagram, drawGangtaegong } from "../lib/juyeok";
 import { juyeokReadings, gangReading } from "../lib/content";
 import { ReadingItem } from "../components/Reading";
@@ -43,6 +44,7 @@ export default function Juyeok({ onBack }: { onBack: () => void }) {
         </>
       )}
       <div className="note">※ 주역점은 문점(問占) 방식으로, 다시 뽑기마다 새 괘가 나옵니다.</div>
+      <BannerAd />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Profile } from "../lib/appTypes";
+import BannerAd from "../components/BannerAd";
 import { biorhythm } from "../lib/fun";
 
 function Bar({ label, v, color }: { label: string; v: number; color: string }) {
@@ -43,6 +44,7 @@ export default function Bio({ profile, onBack }: { profile: Profile | null; onBa
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>오늘의 신체·감정·지성 컨디션을 확인해요</p>
       </section>
       {result || <div className="panel center muted">먼저 <b>오늘</b> 탭에서 생년월일을 등록해 주세요.</div>}
+      <BannerAd />
     </>
   );
 }

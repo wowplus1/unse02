@@ -3,6 +3,7 @@ import type { Profile } from "../lib/appTypes";
 import { sajuFrom } from "../lib/profile";
 import { ddiRanking, starRanking, RankRow } from "../lib/funtoday";
 import ProfileBar from "../components/ProfileBar";
+import BannerAd from "../components/BannerAd";
 
 function medal(rank: number) { return rank === 0 ? "🥇" : rank === 1 ? "🥈" : rank === 2 ? "🥉" : `${rank + 1}`; }
 
@@ -49,6 +50,7 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
         })}
       </div>
       {!profile && <p className="center muted" style={{ fontSize: 12.5, marginTop: 12 }}>생년월일을 등록하면 내 띠·별자리를 하이라이트해 드려요</p>}
+      <BannerAd />
     </>
   );
 }

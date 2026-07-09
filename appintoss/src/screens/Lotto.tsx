@@ -1,4 +1,5 @@
 import type { Profile } from "../lib/appTypes";
+import BannerAd from "../components/BannerAd";
 import { luckyNumbers } from "../lib/fun";
 import { julianOf } from "../lib/tojeong";
 
@@ -32,6 +33,7 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>생년월일로 오늘의 로또 번호(6+보너스)를 뽑아요</p>
       </section>
       {result || <div className="panel center muted">먼저 <b>오늘</b> 탭에서 생년월일을 등록해 주세요.</div>}
+      <BannerAd />
     </>
   );
 }

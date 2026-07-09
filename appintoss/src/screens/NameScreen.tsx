@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BannerAd from "../components/BannerAd";
 import { nameCompat } from "../lib/fun";
 
 function verdict(s: number) {
@@ -36,6 +37,7 @@ export default function NameScreen({ onBack }: { onBack: () => void }) {
           <div className="note">※ 전통 한글 획수 방식의 재미 궁합입니다.</div>
         </div>
       )}
+      <BannerAd />
     </>
   );
 }
