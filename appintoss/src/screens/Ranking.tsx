@@ -58,7 +58,9 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
                     <b style={{ fontSize: 15 }}>{r.label} 오늘의 운세</b>
                     <span className="sc" style={{ marginLeft: "auto" }}>{r.score}점</span>
                   </div>
-                  <p style={{ margin: "0 0 10px", fontSize: 13.5, lineHeight: 1.65 }}>{r.reading.summary}</p>
+                  <p style={{ margin: "0 0 10px", fontSize: 13.5, lineHeight: 1.65 }}>
+                    <b style={{ color: "var(--accent-ink)" }}>{r.reading.trait}</b> {r.reading.summary}
+                  </p>
                   <div style={{ display: "grid", gap: 6, fontSize: 13, lineHeight: 1.55 }}>
                     <div>💗 <b>애정</b> · {r.reading.love}</div>
                     <div>💰 <b>금전</b> · {r.reading.money}</div>

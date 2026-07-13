@@ -131,37 +131,95 @@ const R_SUMMARY: { min: number; arr: string[] }[] = [
     "막힘없이 술술 풀리는 최고의 하루예요. 미뤄둔 일을 시작하기 딱 좋아요.",
     "기분 좋은 일이 겹치는 날. 자신감 있게 밀어붙이면 좋은 결과가 따라와요.",
     "운의 흐름이 활짝 열렸어요. 적극적으로 움직일수록 행운이 커집니다.",
+    "생각한 일이 척척 맞아떨어지는 날. 오늘의 결정이 좋은 열매로 돌아와요.",
+    "주변에서 도움과 인정이 함께 오는 날. 크게 웃을 일이 생기겠어요.",
+    "행운의 별이 당신 편이에요. 새로운 시도가 반가운 성과로 이어집니다.",
   ] },
   { min: 70, arr: [
     "전반적으로 순조로운 하루예요. 작은 기회도 놓치지 말고 챙겨보세요.",
     "웃을 일이 많은 날. 주변과의 관계에서 즐거움을 얻겠어요.",
     "노력한 만큼 결과가 보이는 날. 꾸준함이 빛을 발합니다.",
+    "기분 좋은 소식이 들려올 수 있어요. 긍정적인 마음이 운을 부릅니다.",
+    "흐름을 타면 일이 쉽게 풀려요. 자신의 감을 믿어도 좋은 날.",
+    "작은 성취가 쌓여 뿌듯한 하루. 주변에 감사 인사를 건네보세요.",
   ] },
   { min: 55, arr: [
     "무난하게 흘러가는 하루. 욕심내기보다 페이스를 유지하는 게 좋아요.",
     "평온한 흐름 속에 소소한 즐거움이 있어요. 여유를 가져보세요.",
     "큰 변화보다 익숙한 일에 집중하면 안정적인 하루가 됩니다.",
+    "특별한 기복 없이 잔잔한 날. 계획을 점검하기 좋은 타이밍이에요.",
+    "천천히 가도 괜찮은 날. 나만의 리듬을 지키면 마음이 편해져요.",
+    "무리 없는 하루. 익숙한 사람들과의 시간이 힘이 되어줘요.",
   ] },
   { min: 40, arr: [
     "조금은 신중해야 하는 날. 서두르지 말고 한 박자 쉬어가세요.",
     "예상치 못한 변수에 주의가 필요해요. 확인 또 확인이 안전합니다.",
     "컨디션 관리가 중요한 하루. 무리한 결정은 다음으로 미뤄두세요.",
+    "작은 오해가 생기기 쉬운 날. 말은 한 번 더 곱씹고 꺼내세요.",
+    "속도를 늦추면 실수가 줄어요. 중요한 일은 오후로 미뤄도 좋아요.",
+    "마음이 조급해질 수 있어요. 심호흡 한 번, 여유가 답입니다.",
   ] },
   { min: 0, arr: [
     "오늘은 충전이 필요한 날. 무리하지 말고 나를 돌보는 시간을 가지세요.",
     "흐림 뒤 맑음. 잠시 웅크리며 내일을 준비하기 좋은 날이에요.",
     "큰일은 잠시 접어두세요. 휴식이 곧 최고의 전략인 하루입니다.",
+    "에너지가 낮은 날. 욕심을 내려놓고 가볍게 보내는 게 좋아요.",
+    "지친 마음을 다독일 시간. 좋아하는 것으로 나를 위로해 주세요.",
+    "조용히 재정비하는 날. 오늘의 휴식이 내일의 도약이 됩니다.",
   ] },
 ];
-const R_LOVE = ["가까운 사람에게 먼저 다가가면 좋은 신호가 와요.", "솔직한 표현이 관계를 부드럽게 만들어요.", "작은 배려가 큰 호감으로 돌아오는 날.", "혼자만의 시간이 마음을 정리해 줘요.", "오래된 인연에게서 반가운 소식이 있을 수 있어요."];
-const R_MONEY = ["충동구매만 조심하면 무난한 금전운.", "예상 밖의 작은 이득이 생길 수 있어요.", "지출 계획을 세우면 마음이 편해져요.", "투자·큰 결정은 하루 미루는 게 좋아요.", "아껴둔 것이 도움이 되는 날."];
-const R_WORK = ["집중력이 좋아 능률이 오르는 날.", "동료의 도움으로 일이 수월해져요.", "꼼꼼함이 실수를 막아줘요.", "새 아이디어가 좋은 평가를 받겠어요.", "서두르기보다 마무리에 신경 쓰세요."];
-const R_TIP = ["오늘의 한마디: 미소가 최고의 행운템!", "팁: 물을 자주 마시면 컨디션이 올라가요.", "오늘은 평소 안 가던 길로 가보세요.", "감사 인사 한마디가 좋은 기운을 불러와요.", "작은 정리정돈이 운을 부릅니다."];
+const R_LOVE = [
+  "가까운 사람에게 먼저 다가가면 좋은 신호가 와요.", "솔직한 표현이 관계를 부드럽게 만들어요.",
+  "작은 배려가 큰 호감으로 돌아오는 날.", "혼자만의 시간이 마음을 정리해 줘요.",
+  "오래된 인연에게서 반가운 소식이 있을 수 있어요.", "따뜻한 말 한마디가 분위기를 살려요.",
+  "함께 있는 시간의 소중함을 느끼는 날.", "설레는 만남이나 연락이 있을 수 있어요.",
+  "상대의 입장을 헤아리면 관계가 깊어져요.",
+];
+const R_MONEY = [
+  "충동구매만 조심하면 무난한 금전운.", "예상 밖의 작은 이득이 생길 수 있어요.",
+  "지출 계획을 세우면 마음이 편해져요.", "투자·큰 결정은 하루 미루는 게 좋아요.",
+  "아껴둔 것이 도움이 되는 날.", "정보를 잘 챙기면 손해를 막을 수 있어요.",
+  "커피 한 잔의 여유가 오히려 돈을 아껴줘요.", "작은 절약이 큰 만족으로 돌아와요.",
+  "금전 관련 약속은 문서로 확실히 해두세요.",
+];
+const R_WORK = [
+  "집중력이 좋아 능률이 오르는 날.", "동료의 도움으로 일이 수월해져요.",
+  "꼼꼼함이 실수를 막아줘요.", "새 아이디어가 좋은 평가를 받겠어요.",
+  "서두르기보다 마무리에 신경 쓰세요.", "미뤄둔 일을 처리하면 마음이 가벼워져요.",
+  "협업에서 좋은 시너지가 나는 날.", "작은 준비가 큰 기회를 잡게 해줘요.",
+  "한 가지에 집중하면 성과가 확실해요.",
+];
+const R_TIP = [
+  "오늘의 한마디: 미소가 최고의 행운템!", "팁: 물을 자주 마시면 컨디션이 올라가요.",
+  "오늘은 평소 안 가던 길로 가보세요.", "감사 인사 한마디가 좋은 기운을 불러와요.",
+  "작은 정리정돈이 운을 부릅니다.", "아침의 스트레칭이 하루를 가볍게 해줘요.",
+  "좋아하는 음악 한 곡이 기분을 바꿔줘요.", "밝은색 소품이 행운을 끌어당겨요.",
+  "누군가를 칭찬하면 그 복이 나에게 와요.",
+];
 
-export interface RankReading { summary: string; love: string; money: string; work: string; tip: string; }
-function rankReading(seed: number, score: number): RankReading {
+// 띠/별자리별 고유 성격 멘트 (정체성 — 매일 고정, DDI/SIGNS 순서와 동일)
+const DDI_TRAIT = [
+  "빠른 눈치와 기지로 기회를 잘 잡는 당신,", "묵묵한 성실함으로 신뢰를 쌓는 당신,",
+  "결단력과 카리스마가 돋보이는 당신,", "부드러운 센스로 사람을 끌어당기는 당신,",
+  "타고난 리더십과 추진력의 당신,", "깊은 통찰과 예리한 직관의 당신,",
+  "활기와 열정이 넘치는 당신,", "따뜻한 배려심이 빛나는 당신,",
+  "재치와 재주가 많은 당신,", "부지런하고 야무진 당신,",
+  "의리와 성실함이 돋보이는 당신,", "넉넉한 마음으로 복을 부르는 당신,",
+];
+const SIGN_TRAIT = [
+  "열정과 도전정신이 넘치는 당신,", "끈기와 안정감이 강점인 당신,",
+  "호기심과 재치가 많은 당신,", "정 많고 섬세한 당신,",
+  "당당한 존재감의 당신,", "꼼꼼하고 분석적인 당신,",
+  "균형 감각과 매력을 지닌 당신,", "강한 집중력과 직관의 당신,",
+  "자유롭고 낙천적인 당신,", "책임감과 인내심이 강한 당신,",
+  "독창적이고 개성 있는 당신,", "감성이 풍부하고 따뜻한 당신,",
+];
+
+export interface RankReading { trait: string; summary: string; love: string; money: string; work: string; tip: string; }
+function rankReading(seed: number, score: number, trait: string): RankReading {
   const grp = R_SUMMARY.find((x) => score >= x.min)!;
   return {
+    trait,
     summary: pickFrom(grp.arr, seed + 11),
     love: pickFrom(R_LOVE, seed + 22),
     money: pickFrom(R_MONEY, seed + 33),
@@ -172,18 +230,18 @@ function rankReading(seed: number, score: number): RankReading {
 
 // ── 띠/별자리 오늘 랭킹 ──
 export interface RankRow { idx: number; label: string; emoji: string; score: number; keyword: string; reading: RankReading; }
-function rankList(labels: { ko: string; emoji: string }[], salt: number, now: Date): RankRow[] {
+function rankList(labels: { ko: string; emoji: string; trait: string }[], salt: number, now: Date): RankRow[] {
   const todayJd = julianOf(now.getFullYear(), now.getMonth() + 1, now.getDate());
   const rows = labels.map((l, idx) => {
     const seed = todayJd * 131 + idx * salt + salt;
     const score = clamp(Math.round(45 + hash01(seed) * 54), 41, 99);
-    return { idx, label: l.ko, emoji: l.emoji, score, keyword: moodOf(score, seed).keyword, reading: rankReading(seed, score) };
+    return { idx, label: l.ko, emoji: l.emoji, score, keyword: moodOf(score, seed).keyword, reading: rankReading(seed, score, l.trait) };
   });
   return rows.sort((a, b) => b.score - a.score);
 }
 export function ddiRanking(now: Date = new Date()): RankRow[] {
-  return rankList(DDI.map((d) => ({ ko: d.ko + "띠", emoji: d.emoji })), 137, now);
+  return rankList(DDI.map((d, i) => ({ ko: d.ko + "띠", emoji: d.emoji, trait: DDI_TRAIT[i] })), 137, now);
 }
 export function starRanking(now: Date = new Date()): RankRow[] {
-  return rankList(SIGNS, 211, now);
+  return rankList(SIGNS.map((s, i) => ({ ko: s.ko, emoji: s.emoji, trait: SIGN_TRAIT[i] })), 211, now);
 }
