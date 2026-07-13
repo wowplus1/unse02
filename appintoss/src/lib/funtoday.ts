@@ -38,16 +38,16 @@ function moodOf(score: number, seed: number) {
 
 // 날짜마다 바뀌는 카드 테마(배경 그라데이션 + 아이콘) — 흰 글씨가 잘 보이는 중간 채도로 구성.
 const THEMES: { grad: string; icon: string }[] = [
-  { grad: "linear-gradient(150deg,#ff8fab,#ff6f91 55%,#ffa26b)", icon: "🌅" },
-  { grad: "linear-gradient(150deg,#a98bff,#8f9bff 55%,#c9a7ff)", icon: "🔮" },
-  { grad: "linear-gradient(150deg,#46cfa8,#3bb6c9 55%,#5fd0b0)", icon: "🌊" },
-  { grad: "linear-gradient(150deg,#5fb2ff,#6f8bff 55%,#8fbfff)", icon: "☁️" },
-  { grad: "linear-gradient(150deg,#ff9a3d,#ff7a59 55%,#ffb454)", icon: "🌞" },
-  { grad: "linear-gradient(150deg,#ff6f91,#e15c8a 55%,#c44fc4)", icon: "🌹" },
-  { grad: "linear-gradient(150deg,#4bbf87,#3aa0a0 55%,#5bbf7a)", icon: "🍀" },
-  { grad: "linear-gradient(150deg,#7b6cff,#9b5cff 55%,#c86fd9)", icon: "✨" },
-  { grad: "linear-gradient(150deg,#ff9e7a,#ff8fab 55%,#ffc46b)", icon: "🍑" },
-  { grad: "linear-gradient(150deg,#6a7bd8,#8f6fd0 55%,#b06fc0)", icon: "🌙" },
+  { grad: "linear-gradient(150deg,#e9a84c,#dd8f3a 55%,#c9762e)", icon: "🌅" },
+  { grad: "linear-gradient(150deg,#b59a7d,#a5876a 55%,#8f7256)", icon: "🔮" },
+  { grad: "linear-gradient(150deg,#7fa398,#6b9184 55%,#587d70)", icon: "🌊" },
+  { grad: "linear-gradient(150deg,#8fa87e,#7d9668 55%,#6b8455)", icon: "🍃" },
+  { grad: "linear-gradient(150deg,#e6b95c,#d9a544 55%,#c69133)", icon: "🌞" },
+  { grad: "linear-gradient(150deg,#d29488,#c17d76 55%,#ad6763)", icon: "🌹" },
+  { grad: "linear-gradient(150deg,#8fa87e,#7d9668 55%,#6b8455)", icon: "🍀" },
+  { grad: "linear-gradient(150deg,#4a4642,#3a3632 55%,#2a2724)", icon: "✨" },
+  { grad: "linear-gradient(150deg,#eabf6a,#e0a94c 55%,#cf9436)", icon: "🍑" },
+  { grad: "linear-gradient(150deg,#a89bb0,#96889f 55%,#82758c)", icon: "🌙" },
 ];
 
 // 오행 → 행운 아이템

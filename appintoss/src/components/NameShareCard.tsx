@@ -10,7 +10,7 @@ export default function NameShareCard({ a, b, score, verdict, id = "name-share-c
       id={id}
       style={{
         position: "relative", width: "100%", maxWidth: 360, margin: "0 auto",
-        background: "linear-gradient(150deg,#ff8fb4,#ff6f91 48%,#a97bff)", color: "#fff",
+        background: "linear-gradient(150deg,#eab98a,#e0a06a 48%,#d1897a)", color: "#fff",
         borderRadius: 26, padding: 24, boxShadow: "0 14px 40px rgba(226,120,150,.28)", overflow: "hidden",
         fontFamily: '"Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif',
       }}

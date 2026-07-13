@@ -1,92 +1,93 @@
-/* unse02 — 점신풍 미스틱 디자인 (라이트 + 보라/금색 포인트, 둥근 카드) */
+/* unse02 — 웜 미니멀 디자인 (크림 배경 + 골드 포인트 + 차콜 텍스트, 둥근 카드) */
 :root {
   /* 배경/표면 */
-  --bg: #f6f4ff;
-  --bg2: #efeaff;
+  --bg: #f3eee4;
+  --bg2: #ece5d7;
   --card: #ffffff;
-  --card-soft: #faf8ff;
-  --soft: #f1edff;        /* 칩/인풋/아이템 배경 */
-  --soft2: #e9e3ff;
-  --line: #e6ddff;
-  --line2: #ece7f9;
+  --card-soft: #faf7f0;
+  --soft: #f1ece2;        /* 칩/인풋/아이템 배경 */
+  --soft2: #e8e1d3;
+  --line: #e6dfd0;
+  --line2: #ece7dc;
 
   /* 텍스트 */
-  --text: #2a2340;
-  --muted: #8b83a8;
+  --text: #201f1e;        /* 차콜 */
+  --muted: #93897a;       /* 웜 그레이/토프 */
 
-  /* 브랜드 컬러 — 보라 프라이머리 + 금색 세컨더리 */
-  --accent: #7b5cff;       /* 보라 */
-  --accent-ink: #5f3fe0;   /* 진보라 (텍스트/링크) */
-  --accent-soft: #ece7ff;
-  --gold: #e0a92e;         /* 금색 포인트 */
-  --gold-ink: #b9851f;
-  --gold-soft: #fbf1d6;
-  --peach: #c9a7ff;
-  --peach-soft: #efe6ff;
-  --mint: #2fb894;
-  --mint-soft: #dff5ee;
-  --sky: #5a8cff;
-  --sky-soft: #e2ebff;
-  --lavender: #a98bff;
-  --lavender-soft: #ece4ff;
-  --butter: #e0a92e;
-  --butter-soft: #fbf1d6;
-  --good: #23b47e;
-  --warn: #e0913f;
+  /* 브랜드 컬러 — 골드/옐로 프라이머리 (채움) + 차콜 텍스트 */
+  --accent: #ffcf68;       /* 골드 옐로 (채움) */
+  --accent-ink: #6f5d2a;   /* 진한 웜브라운 (텍스트/링크용, 밝은 배경에서 가독) */
+  --accent-soft: #fdf2d5;  /* 옅은 옐로 (칩/하이라이트 배경) */
+  --gold: #f0b53f;
+  --gold-ink: #8a6d1f;
+  --gold-soft: #fdf2d5;
+  --peach: #e9c07a;
+  --peach-soft: #fbeecf;
+  --mint: #5b9e86;
+  --mint-soft: #e4efe7;
+  --sky: #7d94b8;
+  --sky-soft: #e8ecf2;
+  --lavender: #b5a18b;     /* 토프 */
+  --lavender-soft: #efe9df;
+  --butter: #ffcf68;
+  --butter-soft: #fdf2d5;
+  --good: #5b9e86;
+  --warn: #d08a3c;
 
   /* 오행 컬러 */
-  --oh-mok: #2fb894;   /* 목 초록 */
-  --oh-hwa: #ff6f91;   /* 화 빨강 */
+  --oh-mok: #5b9e86;   /* 목 초록 */
+  --oh-hwa: #d9705f;   /* 화 빨강 */
   --oh-to: #e0a92e;    /* 토 금 */
-  --oh-geum: #b9c2cc;  /* 금 은회 */
-  --oh-su: #5a8cff;    /* 수 파랑 */
+  --oh-geum: #b0a894;  /* 금 은회 */
+  --oh-su: #7d94b8;    /* 수 파랑 */
 
   /* 모양 */
   --r: 24px;
   --r-md: 18px;
   --r-sm: 13px;
-  --shadow: 0 2px 6px rgba(90,63,224,.06), 0 10px 26px rgba(90,63,224,.10);
-  --shadow-lg: 0 14px 40px rgba(90,63,224,.20);
-  --grad-brand: linear-gradient(135deg, #9a7bff, #7b5cff 55%, #6a4bff);
-  --grad-soft: linear-gradient(135deg, #f1edff, #efe6ff);
+  --shadow: 0 2px 6px rgba(32,31,30,.05), 0 10px 26px rgba(32,31,30,.08);
+  --shadow-lg: 0 14px 40px rgba(32,31,30,.16);
+  --grad-brand: linear-gradient(135deg, #ffdb87, #ffcf68 55%, #f4be47);
+  --grad-soft: linear-gradient(135deg, #f3ece0, #efe7d9);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #12102a;
-    --bg2: #1a1640;
-    --card: #201c44;
-    --card-soft: #262052;
-    --soft: #262052;
-    --soft2: #2e2860;
-    --line: #332c66;
-    --line2: #38316b;
-    --text: #efeafc;
-    --muted: #a99fce;
-    --accent: #b9a7ff;
-    --accent-ink: #cbb9ff;
-    --accent-soft: #2e2660;
-    --gold: #f4c95d; --gold-ink: #f4c95d; --gold-soft: #3a3016;
-    --peach-soft: #2e2660;
-    --mint-soft: #143a34;
-    --sky-soft: #1c2c50;
-    --lavender-soft: #2a2458;
-    --butter-soft: #3a3016;
+    --bg: #1c1b19;
+    --bg2: #232120;
+    --card: #2a2724;
+    --card-soft: #302c28;
+    --soft: #302c28;
+    --soft2: #3a352f;
+    --line: #403a33;
+    --line2: #443e37;
+    --text: #f3efe6;
+    --muted: #a89d8b;
+    --accent: #ffcf68;
+    --accent-ink: #ffd97e;
+    --accent-soft: #3a3320;
+    --gold: #ffcf68; --gold-ink: #ffd97e; --gold-soft: #3a3320;
+    --peach-soft: #3a3320;
+    --mint-soft: #1e332b;
+    --sky-soft: #242a33;
+    --lavender-soft: #332f27;
+    --butter-soft: #3a3320;
     --shadow: 0 2px 6px rgba(0,0,0,.3), 0 10px 26px rgba(0,0,0,.4);
-    --shadow-lg: 0 14px 40px rgba(0,0,0,.55);
-    --grad-soft: linear-gradient(135deg, #262052, #2a2458);
+    --shadow-lg: 0 14px 40px rgba(0,0,0,.5);
+    --grad-soft: linear-gradient(135deg, #302c28, #353029);
   }
 }
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #12102a; --bg2: #1a1640; --card: #201c44; --card-soft: #262052;
-  --soft: #262052; --soft2: #2e2860; --line: #332c66; --line2: #38316b;
-  --text: #efeafc; --muted: #a99fce; --accent: #b9a7ff; --accent-ink: #cbb9ff;
-  --accent-soft: #2e2660; --gold: #f4c95d; --gold-ink: #f4c95d; --gold-soft: #3a3016;
-  --peach-soft: #2e2660; --mint-soft: #143a34; --sky-soft: #1c2c50;
-  --lavender-soft: #2a2458; --butter-soft: #3a3016;
-  --shadow-lg: 0 14px 40px rgba(0,0,0,.55);
+  --bg: #1c1b19; --bg2: #232120; --card: #2a2724; --card-soft: #302c28;
+  --soft: #302c28; --soft2: #3a352f; --line: #403a33; --line2: #443e37;
+  --text: #f3efe6; --muted: #a89d8b; --accent: #ffcf68; --accent-ink: #ffd97e;
+  --accent-soft: #3a3320; --gold: #ffcf68; --gold-ink: #ffd97e; --gold-soft: #3a3320;
+  --peach-soft: #3a3320; --mint-soft: #1e332b; --sky-soft: #242a33;
+  --lavender-soft: #332f27; --butter-soft: #3a3320;
+  --grad-soft: linear-gradient(135deg, #302c28, #353029);
+  --shadow-lg: 0 14px 40px rgba(0,0,0,.5);
 }
 
 * { box-sizing: border-box; }
@@ -197,8 +198,8 @@ a.card:active { transform: translateY(-1px); }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   width: 100%; padding: 15px 18px; border: none; border-radius: 16px; cursor: pointer;
-  background: var(--grad-brand); color: #fff; font-weight: 800; font-size: 15px; letter-spacing: -0.02em;
-  box-shadow: 0 6px 18px rgba(255,111,145,.32); transition: transform .12s ease, filter .12s ease;
+  background: var(--grad-brand); color: #201f1e; font-weight: 800; font-size: 15px; letter-spacing: -0.02em;
+  box-shadow: 0 6px 18px rgba(240,181,63,.35); transition: transform .12s ease, filter .12s ease;
 }
 .btn:hover { filter: brightness(1.03); }
 .btn:active { transform: translateY(1px); }
@@ -313,7 +314,7 @@ input:focus, select:focus { border-color: var(--accent); }
 /* 선택 pill (띠/별자리 그리드) */
 .pill { display: block; text-align: center; background: var(--soft); border: 1px solid var(--line2); border-radius: 16px; padding: 12px 6px; cursor: pointer; transition: transform .12s ease; }
 .pill:hover { transform: translateY(-2px); }
-.pill.on { background: var(--grad-brand); color: #fff; border-color: transparent; }
+.pill.on { background: var(--grad-brand); color: #201f1e; border-color: transparent; }
 
 /* 캡처 이미지 미리보기 모달 */
 .cap-modal {

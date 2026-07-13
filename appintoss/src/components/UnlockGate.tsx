@@ -27,13 +27,13 @@ export default function UnlockGate({ onUnlock }: { onUnlock: (points: number) =>
 
   return (
     <button className="card" onClick={watch} disabled={busy}
-      style={{ width: "100%", textAlign: "left", border: "none", cursor: "pointer", background: "var(--grad-brand)", color: "#fff", display: "flex", alignItems: "center", gap: 12 }}>
+      style={{ width: "100%", textAlign: "left", border: "none", cursor: "pointer", background: "var(--grad-brand)", color: "#201f1e", display: "flex", alignItems: "center", gap: 12 }}>
       <span style={{ fontSize: 26, lineHeight: 1 }}>🎁</span>
       <div style={{ flex: 1 }}>
         <div style={{ fontWeight: 800, fontSize: 15 }}>{busy ? "광고 준비 중…" : "리워드 보고 오늘 운세 모두 무료로 열기"}</div>
-        <div style={{ fontSize: 12, opacity: .92 }}>광고 시청 완료 시 상세 풀이·더보기 전체 오픈 <b>+{BONUS}P</b></div>
+        <div style={{ fontSize: 12, opacity: .78 }}>광고 시청 완료 시 상세 풀이·더보기 전체 오픈 <b>+{BONUS}P</b></div>
       </div>
-      <span style={{ fontSize: 10, fontWeight: 800, background: "rgba(255,255,255,.22)", borderRadius: 999, padding: "3px 8px" }}>AD</span>
+      <span style={{ fontSize: 10, fontWeight: 800, background: "rgba(32,31,30,.14)", borderRadius: 999, padding: "3px 8px" }}>AD</span>
     </button>
   );
 }

@@ -30,6 +30,16 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
 
+      <div className="sec">🎉 더 즐기기</div>
+      <div className="grid">
+        <button className="card" onClick={() => onNavigate("ranking")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
+          <div className="ico">🏆</div><div className="t">오늘의 랭킹</div><div className="d">띠·별자리 순위</div>
+        </button>
+        <button className="card" onClick={() => onNavigate("fun")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
+          <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
+        </button>
+      </div>
+
       {!unlocked ? (
         <div style={{ marginTop: 12 }}>
           <UnlockGate onUnlock={(p) => { setPoints(p); setUnlocked(true); }} />
@@ -99,16 +109,6 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
           <div className="muted" style={{ fontSize: 11 }}>아이템</div>
           <div style={{ fontWeight: 800, fontSize: 13, marginTop: 3 }}>{ft.luck.item}</div>
         </div>
-      </div>
-
-      <div className="sec">🎉 더 즐기기</div>
-      <div className="grid">
-        <button className="card" onClick={() => onNavigate("ranking")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
-          <div className="ico">🏆</div><div className="t">오늘의 랭킹</div><div className="d">띠·별자리 순위</div>
-        </button>
-        <button className="card" onClick={() => onNavigate("fun")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
-          <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
-        </button>
       </div>
 
       {/* 정책: 스크롤 화면 하단 배너 */}
