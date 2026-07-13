@@ -125,14 +125,59 @@ export function funToday(parsed: ParsedProfile, now: Date = new Date()): FunToda
   };
 }
 
+// ── 띠/별자리 오늘 운세 풀이 (가벼운 재미, 점수대+시드로 결정) ──
+const R_SUMMARY: { min: number; arr: string[] }[] = [
+  { min: 85, arr: [
+    "막힘없이 술술 풀리는 최고의 하루예요. 미뤄둔 일을 시작하기 딱 좋아요.",
+    "기분 좋은 일이 겹치는 날. 자신감 있게 밀어붙이면 좋은 결과가 따라와요.",
+    "운의 흐름이 활짝 열렸어요. 적극적으로 움직일수록 행운이 커집니다.",
+  ] },
+  { min: 70, arr: [
+    "전반적으로 순조로운 하루예요. 작은 기회도 놓치지 말고 챙겨보세요.",
+    "웃을 일이 많은 날. 주변과의 관계에서 즐거움을 얻겠어요.",
+    "노력한 만큼 결과가 보이는 날. 꾸준함이 빛을 발합니다.",
+  ] },
+  { min: 55, arr: [
+    "무난하게 흘러가는 하루. 욕심내기보다 페이스를 유지하는 게 좋아요.",
+    "평온한 흐름 속에 소소한 즐거움이 있어요. 여유를 가져보세요.",
+    "큰 변화보다 익숙한 일에 집중하면 안정적인 하루가 됩니다.",
+  ] },
+  { min: 40, arr: [
+    "조금은 신중해야 하는 날. 서두르지 말고 한 박자 쉬어가세요.",
+    "예상치 못한 변수에 주의가 필요해요. 확인 또 확인이 안전합니다.",
+    "컨디션 관리가 중요한 하루. 무리한 결정은 다음으로 미뤄두세요.",
+  ] },
+  { min: 0, arr: [
+    "오늘은 충전이 필요한 날. 무리하지 말고 나를 돌보는 시간을 가지세요.",
+    "흐림 뒤 맑음. 잠시 웅크리며 내일을 준비하기 좋은 날이에요.",
+    "큰일은 잠시 접어두세요. 휴식이 곧 최고의 전략인 하루입니다.",
+  ] },
+];
+const R_LOVE = ["가까운 사람에게 먼저 다가가면 좋은 신호가 와요.", "솔직한 표현이 관계를 부드럽게 만들어요.", "작은 배려가 큰 호감으로 돌아오는 날.", "혼자만의 시간이 마음을 정리해 줘요.", "오래된 인연에게서 반가운 소식이 있을 수 있어요."];
+const R_MONEY = ["충동구매만 조심하면 무난한 금전운.", "예상 밖의 작은 이득이 생길 수 있어요.", "지출 계획을 세우면 마음이 편해져요.", "투자·큰 결정은 하루 미루는 게 좋아요.", "아껴둔 것이 도움이 되는 날."];
+const R_WORK = ["집중력이 좋아 능률이 오르는 날.", "동료의 도움으로 일이 수월해져요.", "꼼꼼함이 실수를 막아줘요.", "새 아이디어가 좋은 평가를 받겠어요.", "서두르기보다 마무리에 신경 쓰세요."];
+const R_TIP = ["오늘의 한마디: 미소가 최고의 행운템!", "팁: 물을 자주 마시면 컨디션이 올라가요.", "오늘은 평소 안 가던 길로 가보세요.", "감사 인사 한마디가 좋은 기운을 불러와요.", "작은 정리정돈이 운을 부릅니다."];
+
+export interface RankReading { summary: string; love: string; money: string; work: string; tip: string; }
+function rankReading(seed: number, score: number): RankReading {
+  const grp = R_SUMMARY.find((x) => score >= x.min)!;
+  return {
+    summary: pickFrom(grp.arr, seed + 11),
+    love: pickFrom(R_LOVE, seed + 22),
+    money: pickFrom(R_MONEY, seed + 33),
+    work: pickFrom(R_WORK, seed + 44),
+    tip: pickFrom(R_TIP, seed + 55),
+  };
+}
+
 // ── 띠/별자리 오늘 랭킹 ──
-export interface RankRow { idx: number; label: string; emoji: string; score: number; keyword: string; }
+export interface RankRow { idx: number; label: string; emoji: string; score: number; keyword: string; reading: RankReading; }
 function rankList(labels: { ko: string; emoji: string }[], salt: number, now: Date): RankRow[] {
   const todayJd = julianOf(now.getFullYear(), now.getMonth() + 1, now.getDate());
   const rows = labels.map((l, idx) => {
     const seed = todayJd * 131 + idx * salt + salt;
     const score = clamp(Math.round(45 + hash01(seed) * 54), 41, 99);
-    return { idx, label: l.ko, emoji: l.emoji, score, keyword: moodOf(score, seed).keyword };
+    return { idx, label: l.ko, emoji: l.emoji, score, keyword: moodOf(score, seed).keyword, reading: rankReading(seed, score) };
   });
   return rows.sort((a, b) => b.score - a.score);
 }

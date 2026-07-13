@@ -11,6 +11,7 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
   profile: Profile | null; onEdit: () => void; onDelete: () => void; onBack: () => void;
 }) {
   const [tab, setTab] = useState<"ddi" | "star">("ddi");
+  const [open, setOpen] = useState<number | null>(null);
   const rows = tab === "star" ? starRanking() : ddiRanking();
   const now = new Date();
   let mine = "";
@@ -28,7 +29,7 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
 
       <div className="chips" style={{ marginTop: 12 }}>
         {(["ddi", "star"] as const).map((t) => (
-          <button key={t} className="chip" onClick={() => setTab(t)}
+          <button key={t} className="chip" onClick={() => { setTab(t); setOpen(null); }}
             style={{ cursor: "pointer", ...(tab === t ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent", fontWeight: 700 } : {}) }}>
             {t === "ddi" ? "🐭 띠별" : "⭐ 별자리"}
           </button>
@@ -38,13 +39,36 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
       <div className="panel" style={{ padding: 12 }}>
         {rows.map((r: RankRow, i) => {
           const isMine = !!mine && r.label === mine;
+          const isOpen = open === r.idx;
           return (
-            <div key={r.idx} className="rankrow" style={isMine ? { background: "var(--accent-soft)", borderColor: "transparent" } : {}}>
-              <span className="rk">{medal(i)}</span>
-              <span className="em">{r.emoji}</span>
-              <span className="nm">{r.label}{isMine && <b style={{ color: "var(--accent-ink)", fontSize: 11, marginLeft: 6 }}>내 순위</b>}</span>
-              <span className="kw muted">{r.keyword}</span>
-              <span className="sc">{r.score}점</span>
+            <div key={r.idx}>
+              <div className="rankrow" onClick={() => setOpen(isOpen ? null : r.idx)}
+                style={{ cursor: "pointer", ...(isMine ? { background: "var(--accent-soft)", borderColor: "transparent" } : {}), ...(isOpen ? { borderColor: "var(--accent)" } : {}) }}>
+                <span className="rk">{medal(i)}</span>
+                <span className="em">{r.emoji}</span>
+                <span className="nm">{r.label}{isMine && <b style={{ color: "var(--accent-ink)", fontSize: 11, marginLeft: 6 }}>내 순위</b>}</span>
+                <span className="kw muted">{r.keyword}</span>
+                <span className="sc">{r.score}점</span>
+                <span style={{ marginLeft: 6, color: "var(--muted)", fontSize: 12, flex: "none" }}>{isOpen ? "▴" : "▾"}</span>
+              </div>
+              {isOpen && (
+                <div style={{ background: "var(--soft)", border: "1px solid var(--line2)", borderRadius: 14, padding: "13px 15px", margin: "2px 2px 9px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                    <span style={{ fontSize: 22 }}>{r.emoji}</span>
+                    <b style={{ fontSize: 15 }}>{r.label} 오늘의 운세</b>
+                    <span className="sc" style={{ marginLeft: "auto" }}>{r.score}점</span>
+                  </div>
+                  <p style={{ margin: "0 0 10px", fontSize: 13.5, lineHeight: 1.65 }}>{r.reading.summary}</p>
+                  <div style={{ display: "grid", gap: 6, fontSize: 13, lineHeight: 1.55 }}>
+                    <div>💗 <b>애정</b> · {r.reading.love}</div>
+                    <div>💰 <b>금전</b> · {r.reading.money}</div>
+                    <div>💼 <b>직장</b> · {r.reading.work}</div>
+                  </div>
+                  <div style={{ marginTop: 10, padding: "8px 11px", borderRadius: 10, background: "var(--accent-soft)", color: "var(--accent-ink)", fontSize: 12.5, fontWeight: 600 }}>
+                    ✨ {r.reading.tip}
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}
