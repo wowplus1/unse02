@@ -1,7 +1,7 @@
 // 가벼운 매일 운세 엔진 — 생년월일 + 오늘 날짜로 결정적(seed) 산출.
 // 명리 계산(dailyMyeongri)을 기반 점수로 쓰되, 재미있게 0~100 + 키워드/이모지로 포장.
 import { computeSaju, SajuProfile } from "./saju";
-import { dailyPool, dailyReadings, todayLucky } from "./content";
+import { dailyPool, dailyReadings, luckyByOheng, OHENG_KO_LIST } from "./content";
 import { personalSeed, todayPick, julianOf } from "./tojeong";
 import { dailyMyeongri, ganzhiOfDate } from "./myeongri";
 import { DDI, SIGNS } from "./fun";
@@ -113,12 +113,14 @@ export function funToday(parsed: ParsedProfile, now: Date = new Date()): FunToda
     { key: "move", label: "이동·이사운", emoji: "🚗", full: byTitle("이동")?.body || "" },
   ].filter((m) => m.full);
 
-  const lk = todayLucky(p.dayGan);
+  // 오늘의 행운 오행 — 사람+날짜 시드로 매일 바뀌며, 색·행운수·아이템이 함께 결정됨
+  const dailyOh = OHENG_KO_LIST[Math.floor(hash01(seed + 555) * OHENG_KO_LIST.length) % OHENG_KO_LIST.length];
+  const lk = luckyByOheng(dailyOh);
   return {
     dateText: `${now.getMonth() + 1}월 ${now.getDate()}일`,
     weekday: WD[now.getDay()],
     score, keyword, emoji: theme.icon, grad: theme.grad, tone, headline, cats, more,
-    luck: { color: lk.color, num: lk.num, item: OHENG_ITEM[p.day.ganOheng] || "행운의 소품" },
+    luck: { color: lk.color, num: lk.num, item: OHENG_ITEM[dailyOh] || "행운의 소품" },
     zodiac: p.zodiac, starSign: p.starSign, dayGanKo: p.dayGanKo,
   };
 }

@@ -316,6 +316,11 @@ export function todayLucky(iljuGanHan: string): { oheng: string; color: string; 
   const oh = GAN_OHENG_KO[iljuGanHan] || "-";
   return { oheng: oh, color: OHENG_COLOR2[oh] || "-", num: OHENG_NUM2[oh] || "-" };
 }
+// 오행(목화토금수) 키로 직접 행운색/수를 조회 — '오늘의 행운 오행'을 매일 뽑는 용도.
+export const OHENG_KO_LIST = ["목", "화", "토", "금", "수"] as const;
+export function luckyByOheng(oh: string): { oheng: string; color: string; num: string } {
+  return { oheng: oh, color: OHENG_COLOR2[oh] || "-", num: OHENG_NUM2[oh] || "-" };
+}
 
 // 오행 궁합(G023): 남성오행 + 여성오행 (예: '목화')
 export function ohengGunghap(maleOheng: string, femaleOheng: string): Reading | null {
