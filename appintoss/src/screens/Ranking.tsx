@@ -39,7 +39,7 @@ export default function Ranking({ profile, onBack }: {
         ))}
       </div>
 
-      <div className="panel" style={{ padding: 12 }}>
+      <div className="panel" style={{ padding: 12, marginTop: 16 }}>
         {rows.map((r: RankRow, i) => {
           const isMine = !!mine && r.label === mine;
           const isOpen = open === r.idx;
