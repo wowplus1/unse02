@@ -7,22 +7,17 @@ import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
 import UnlockGate from "../components/UnlockGate";
 import BannerAd from "../components/BannerAd";
-import { getPoints } from "../lib/points";
 import { isUnlockedToday } from "../lib/unlock";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
   profile: Profile; onEdit: () => void; onDelete: () => void; onNavigate: (v: View) => void;
 }) {
   const ft = funToday(profile);
-  const [points, setPoints] = useState(() => getPoints());
   const [unlocked, setUnlocked] = useState(() => isUnlockedToday());
   return (
     <>
       <section style={{ padding: "10px 2px 6px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div className="muted" style={{ fontSize: 13 }}>{ft.dateText} ({ft.weekday}) · 오늘의 운세</div>
-          <span className="chip" style={{ fontWeight: 700 }}>🪙 {points.toLocaleString()}P</span>
-        </div>
+        <div className="muted" style={{ fontSize: 13 }}>{ft.dateText} ({ft.weekday}) · 오늘의 운세</div>
         <h2 style={{ fontSize: 22, margin: "4px 0 0", letterSpacing: "-0.03em", fontWeight: 800 }}>
           {ft.emoji} 오늘은 <span style={{ color: "var(--accent-ink)" }}>{ft.keyword}</span>
         </h2>
@@ -41,7 +36,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 
       {!unlocked ? (
         <div style={{ marginTop: 12 }}>
-          <UnlockGate onUnlock={(p) => { setPoints(p); setUnlocked(true); }} />
+          <UnlockGate onUnlock={() => setUnlocked(true)} />
         </div>
       ) : (
         <div className="card" style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10, background: "var(--soft)", border: "1px solid var(--line2)" }}>
@@ -67,7 +62,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
             <div className="bar" style={{ margin: "2px 0 8px" }}><div className="fill" style={{ width: `${c.score}%` }} /></div>
             {c.full && (unlocked
               ? <ExpandableText text={c.full} />
-              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span style={{ color: "var(--accent-ink)", fontWeight: 700 }}>🔒 상세 풀이는 리워드로</span></div>
+              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span style={{ color: "var(--accent-ink)", fontWeight: 700 }}>🔒 상세 풀이는 광고 보고</span></div>
             )}
           </div>
         ))}
@@ -89,7 +84,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
           <div className="card center muted" style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16 }}>
-            🔒 리워드 보고 <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b>까지 열어보세요
+            🔒 광고 보고 <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b>까지 열어보세요
           </div>
         </>
       ))}
