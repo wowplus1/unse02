@@ -72,7 +72,7 @@ export default function CaptureShare({ targetId = "share-card", fileName = "오�
         <button onClick={onShare} disabled={busy} style={{ background: "var(--grad-brand)", color: "#201f1e", border: "none", fontWeight: 800 }}>
           {busy ? "준비 중…" : "📤 공유하기"}
         </button>
-        <button onClick={onSave} disabled={busy}>💾 저장</button>
+        <button onClick={onSave} disabled={busy} style={{ background: "var(--accent-soft)", color: "var(--accent-ink)", border: "1px solid var(--accent)", fontWeight: 800 }}>💾 이미지 저장</button>
       </div>
       {msg && <p className="center muted" style={{ fontSize: 12, marginTop: 8 }}>{msg}</p>}
     </div>
