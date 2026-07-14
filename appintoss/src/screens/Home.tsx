@@ -33,11 +33,19 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
 
       <div className="grid" style={{ marginTop: 12 }}>
-        <button className="card" onClick={goRanking} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
-          <div className="ico">🏆</div><div className="t">오늘의 랭킹</div><div className="d">띠·별자리 순위</div>
+        <button className="card" onClick={goRanking}
+          style={{ textAlign: "left", border: "none", cursor: "pointer", color: "#3a2c0c", position: "relative", background: "linear-gradient(145deg,#ffe09a,#f4bd4e)", boxShadow: "0 7px 18px rgba(240,181,63,.32)" }}>
+          <div style={{ fontSize: 26, width: 52, height: 52, borderRadius: 16, background: "rgba(255,255,255,.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>🏆</div>
+          <div style={{ fontWeight: 800, fontSize: 16, marginTop: 12, letterSpacing: "-0.02em" }}>오늘의 랭킹</div>
+          <div style={{ fontSize: 12.5, marginTop: 3, opacity: .72 }}>띠·별자리 순위</div>
+          <span style={{ position: "absolute", top: 16, right: 16, fontSize: 17, fontWeight: 800, opacity: .55 }}>→</span>
         </button>
-        <button className="card" onClick={goFun} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
-          <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
+        <button className="card" onClick={goFun}
+          style={{ textAlign: "left", border: "none", cursor: "pointer", color: "#3a1f12", position: "relative", background: "linear-gradient(145deg,#f7bda2,#ec8f6f)", boxShadow: "0 7px 18px rgba(236,143,111,.32)" }}>
+          <div style={{ fontSize: 26, width: 52, height: 52, borderRadius: 16, background: "rgba(255,255,255,.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>🎲</div>
+          <div style={{ fontWeight: 800, fontSize: 16, marginTop: 12, letterSpacing: "-0.02em" }}>재미 운세</div>
+          <div style={{ fontSize: 12.5, marginTop: 3, opacity: .72 }}>로또·궁합·바이오리듬</div>
+          <span style={{ position: "absolute", top: 16, right: 16, fontSize: 17, fontWeight: 800, opacity: .55 }}>→</span>
         </button>
       </div>
 
