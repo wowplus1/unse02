@@ -51,7 +51,8 @@ export default function App() {
     content = (
       <>
         <section className="hero">
-          <div className="ki">{BRAND.logo}</div>
+          <img src={BRAND.iconUrl} alt={BRAND.name}
+            style={{ width: 92, height: 92, borderRadius: 24, objectFit: "cover", boxShadow: "0 8px 22px rgba(0,0,0,.18)" }} />
           <h2>오늘 나의 운세는?</h2>
           <p>생년월일 한 번이면 매일 운세 확인 · 광고 보고 잠긴 풀이까지 무료</p>
         </section>
