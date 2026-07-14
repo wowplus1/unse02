@@ -19,7 +19,7 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
 
   return (
     <>
-      <button className="back" onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer" }}>← 오늘</button>
+      <button className="back" onClick={onBack}>← 오늘</button>
       <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>🏆 오늘의 랭킹</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 0" }}>{now.getMonth() + 1}월 {now.getDate()}일 · 오늘 운세가 좋은 순서</p>

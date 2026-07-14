@@ -27,7 +27,7 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
   }
   return (
     <>
-      <button className="back" onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer" }}>← 재미</button>
+      <button className="back" onClick={onBack}>← 재미</button>
       <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>🔢 행운의 번호</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>생년월일로 오늘의 로또 번호(6+보너스)를 뽑아요</p>

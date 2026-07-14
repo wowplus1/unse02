@@ -38,7 +38,7 @@ export default function Bio({ profile, onBack }: { profile: Profile | null; onBa
   }
   return (
     <>
-      <button className="back" onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer" }}>← 재미</button>
+      <button className="back" onClick={onBack}>← 재미</button>
       <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>📈 바이오리듬</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>오늘의 신체·감정·지성 컨디션을 확인해요</p>

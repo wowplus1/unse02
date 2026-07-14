@@ -293,8 +293,15 @@ input:focus, select:focus { border-color: var(--accent); }
 .tabbar a.on, .tabbar button.on { color: var(--accent-ink); }
 .tabbar a.on .ti, .tabbar button.on .ti { transform: translateY(-1px); }
 
-/* 뒤로가기 */
-.back { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 13.5px; margin: 6px 2px 12px; }
+/* 뒤로가기 — 탭하기 좋은 칩 버튼 */
+.back {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: var(--text); font-size: 13.5px; font-weight: 700; line-height: 1;
+  margin: 2px 0 14px; padding: 9px 15px 9px 12px;
+  background: var(--card); border: 1px solid var(--line2);
+  border-radius: 999px; box-shadow: var(--shadow); cursor: pointer;
+}
+.back:active { transform: translateY(1px); }
 
 /* 공유 버튼 */
 .share { display: flex; gap: 9px; margin-top: 16px; }
