@@ -293,6 +293,12 @@ input:focus, select:focus { border-color: var(--accent); }
 .tabbar a.on, .tabbar button.on { color: var(--accent-ink); }
 .tabbar a.on .ti, .tabbar button.on .ti { transform: translateY(-1px); }
 
+/* 로또 번호 굴리기 연출 */
+@keyframes ballRoll { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.rollball { animation: ballRoll .28s ease-in-out infinite; }
+@keyframes ballLock { 0% { transform: scale(1.3); } 55% { transform: scale(.9); } 100% { transform: scale(1); } }
+.lockball { animation: ballLock .34s var(--ease); }
+
 /* 뒤로가기 — 탭하기 좋은 칩 버튼 */
 .back {
   display: inline-flex; align-items: center; gap: 5px;

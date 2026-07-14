@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Profile } from "../lib/appTypes";
 import BannerAd from "../components/BannerAd";
 import CaptureShare from "../components/CaptureShare";
@@ -6,12 +7,11 @@ import { luckyNumbers } from "../lib/fun";
 import { julianOf } from "../lib/tojeong";
 
 // 번호대별 색(로또 관습) — 광택 있는 3D 볼로 표현
-function ballColor(n: number, bonus?: boolean) {
-  if (bonus) return "#c77dff";
+function ballColor(n: number) {
   return n <= 10 ? "#f4b63e" : n <= 20 ? "#5aa9e6" : n <= 30 ? "#ec6b6b" : n <= 40 ? "#9aa0a6" : "#79c079";
 }
-function Ball({ n, bonus, size = 46 }: { n: number; bonus?: boolean; size?: number }) {
-  const base = ballColor(n, bonus);
+function Ball({ n, size = 46 }: { n: number; size?: number }) {
+  const base = ballColor(n);
   return (
     <span style={{
       display: "inline-flex", width: size, height: size, borderRadius: "50%",
@@ -24,13 +24,45 @@ function Ball({ n, bonus, size = 46 }: { n: number; bonus?: boolean; size?: numb
   );
 }
 
+const rnd = () => 1 + Math.floor(Math.random() * 45);
+
 export default function Lotto({ profile, onBack }: { profile: Profile | null; onBack: () => void }) {
   const now = new Date();
-  let result = null;
-  if (profile) {
+  const main = useMemo<number[]>(() => {
+    if (!profile) return [];
     const todayJd = julianOf(now.getFullYear(), now.getMonth() + 1, now.getDate());
     const seed = julianOf(profile.y, profile.m, profile.d, profile.cal) * 31 + todayJd;
-    const { main } = luckyNumbers(seed);
+    return luckyNumbers(seed).main;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile]);
+
+  // 진입 시 번호를 '굴리다' 하나씩 착착 멈추는 연출
+  const [display, setDisplay] = useState<number[]>(() => main.map(rnd));
+  const [locked, setLocked] = useState(0);
+  const lockedRef = useRef(0);
+
+  useEffect(() => {
+    if (!main.length) return;
+    lockedRef.current = 0; setLocked(0);
+    setDisplay(main.map(rnd));
+    const roll = setInterval(() => {
+      setDisplay((prev) => prev.map((v, i) => (i < lockedRef.current ? main[i] : rnd())));
+    }, 70);
+    const timers = main.map((_, i) =>
+      setTimeout(() => {
+        lockedRef.current = i + 1;
+        setLocked(i + 1);
+        if (i + 1 === main.length) { clearInterval(roll); setDisplay(main); }
+      }, 700 + i * 190)
+    );
+    return () => { clearInterval(roll); timers.forEach(clearTimeout); };
+  }, [main]);
+
+  const rolling = main.length > 0 && locked < main.length;
+  const shown = display.length === main.length ? display : main;
+
+  let result = null;
+  if (profile) {
     const BALL = 58, R = 66, S = 2 * (R + BALL / 2) + 6, c = S / 2;
     result = (
       <>
@@ -41,21 +73,29 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
         </div>
         <div className="chips"><span className="chip"><b>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</b> 행운 번호</span></div>
         <div style={{ background: "radial-gradient(120% 90% at 50% 0%, var(--card-soft), var(--soft))", borderRadius: 18, border: "1px solid var(--line2)", padding: "16px 12px", marginTop: 8 }}>
-          {/* 6개 원형(촘촘) 배치 */}
+          {/* 6개 원형(촘촘) 배치 + 굴리기 연출 */}
           <div style={{ position: "relative", width: S, height: S, margin: "2px auto" }}>
-            {main.map((n, i) => {
+            {main.map((_, i) => {
               const ang = (-90 + i * 60) * Math.PI / 180;
               const x = c + R * Math.cos(ang) - BALL / 2;
               const y = c + R * Math.sin(ang) - BALL / 2;
-              return <span key={n} style={{ position: "absolute", left: x, top: y }}><Ball n={n} size={BALL} /></span>;
+              const isLocked = i < locked;
+              return (
+                <span key={i} className={rolling ? (isLocked ? "lockball" : "rollball") : ""} style={{ position: "absolute", left: x, top: y }}>
+                  <Ball n={shown[i]} size={BALL} />
+                </span>
+              );
             })}
             {/* 중앙 라벨 */}
-            <div style={{ position: "absolute", left: c - 30, top: c - 30, width: 60, height: 60, borderRadius: "50%", background: "var(--card)", border: "1px solid var(--line2)", boxShadow: "var(--shadow)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>🍀</div>
+            <div style={{ position: "absolute", left: c - 30, top: c - 30, width: 60, height: 60, borderRadius: "50%", background: "var(--card)", border: "1px solid var(--line2)", boxShadow: "var(--shadow)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>{rolling ? "🎰" : "🍀"}</div>
+          </div>
+          <div className="center" style={{ fontSize: 12, marginTop: 8, fontWeight: 700, color: rolling ? "var(--accent-ink)" : "var(--muted)" }}>
+            {rolling ? "🎲 번호를 뽑는 중…" : "✨ 오늘의 행운 번호"}
           </div>
         </div>
         <div className="note">※ 생년월일과 오늘 날짜로 계산한 행운 번호입니다. 매일 바뀌며 재미로 즐겨주세요.</div>
       </div>
-      <div style={{ marginTop: 12 }}><CaptureShare targetId="lotto-share-card" fileName="행운번호.png" /></div>
+      {!rolling && <div style={{ marginTop: 12 }}><CaptureShare targetId="lotto-share-card" fileName="행운번호.png" /></div>}
       </>
     );
   }
