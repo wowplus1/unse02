@@ -60,6 +60,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       <div style={{ marginTop: 12 }}><CaptureShare /></div>
 
       <div className="sec">🍀 오늘의 핵심운</div>
+      <div className="panel" style={{ padding: "12px 12px 1px" }}>
       <div className="reading">
         {ft.cats.map((c) => (
           <div className="item" key={c.key}>
@@ -81,10 +82,12 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
           </div>
         ))}
       </div>
+      </div>
 
       {ft.more.length > 0 && (unlocked ? (
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
+          <div className="panel" style={{ padding: "12px 12px 1px" }}>
           <div className="reading">
             {ft.more.map((m) => (
               <div className="item" key={m.key}>
@@ -92,6 +95,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
                 <ExpandableText text={m.full} />
               </div>
             ))}
+          </div>
           </div>
         </>
       ) : (
