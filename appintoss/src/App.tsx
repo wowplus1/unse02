@@ -75,7 +75,7 @@ export default function App() {
       case "bio": content = <Bio profile={profile} onBack={toFun} />; break;
       case "name": content = <NameScreen onBack={toFun} />; break;
       case "gunghap": content = <Gunghap onBack={toFun} />; break;
-      case "juyeok": content = <Juyeok onBack={toFun} />; break;
+      case "juyeok": content = <Juyeok profile={profile} onBack={toFun} />; break;
     }
   }
 
