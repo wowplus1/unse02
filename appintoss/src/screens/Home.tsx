@@ -8,14 +8,20 @@ import ExpandableText from "../components/ExpandableText";
 import UnlockGate from "../components/UnlockGate";
 import UnlockModal from "../components/UnlockModal";
 import BannerAd from "../components/BannerAd";
-import { isUnlockedToday } from "../lib/unlock";
+import { isUnlockedToday, setUnlockedToday, UNLOCK_RANKING, UNLOCK_FUN } from "../lib/unlock";
+
+type Gate = null | "detail" | "ranking" | "fun";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
   profile: Profile; onEdit: () => void; onDelete: () => void; onNavigate: (v: View) => void;
 }) {
   const ft = funToday(profile);
   const [unlocked, setUnlocked] = useState(() => isUnlockedToday());
-  const [gate, setGate] = useState(false);
+  const [gate, setGate] = useState<Gate>(null);
+
+  // 오늘 이미 언락했으면 바로 이동, 아니면 광고 팝업
+  const goRanking = () => (isUnlockedToday(UNLOCK_RANKING) ? onNavigate("ranking") : setGate("ranking"));
+  const goFun = () => (isUnlockedToday(UNLOCK_FUN) ? onNavigate("fun") : setGate("fun"));
   return (
     <>
       <section style={{ padding: "10px 2px 6px" }}>
@@ -28,17 +34,17 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
 
       <div className="grid" style={{ marginTop: 12 }}>
-        <button className="card" onClick={() => onNavigate("ranking")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
+        <button className="card" onClick={goRanking} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
           <div className="ico">🏆</div><div className="t">오늘의 랭킹</div><div className="d">띠·별자리 순위</div>
         </button>
-        <button className="card" onClick={() => onNavigate("fun")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
+        <button className="card" onClick={goFun} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
           <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
         </button>
       </div>
 
       {!unlocked ? (
         <div style={{ marginTop: 12 }}>
-          <UnlockGate onOpen={() => setGate(true)} />
+          <UnlockGate onOpen={() => setGate("detail")} />
         </div>
       ) : (
         <div className="card" style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10, background: "var(--soft)", border: "1px solid var(--line2)" }}>
@@ -64,7 +70,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
             <div className="bar" style={{ margin: "2px 0 8px" }}><div className="fill" style={{ width: `${c.score}%` }} /></div>
             {c.full && (unlocked
               ? <ExpandableText text={c.full} />
-              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span onClick={() => setGate(true)} style={{ color: "var(--accent-ink)", fontWeight: 700, cursor: "pointer" }}>🔒 상세 풀이는 광고 보고</span></div>
+              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span onClick={() => setGate("detail")} style={{ color: "var(--accent-ink)", fontWeight: 700, cursor: "pointer" }}>🔒 상세 풀이는 광고 보고</span></div>
             )}
           </div>
         ))}
@@ -85,7 +91,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       ) : (
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
-          <div className="card center muted" onClick={() => setGate(true)} style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16, cursor: "pointer" }}>
+          <div className="card center muted" onClick={() => setGate("detail")} style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16, cursor: "pointer" }}>
             🔒 광고 보고 <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b>까지 열어보세요
           </div>
         </>
@@ -110,7 +116,21 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       {/* 정책: 스크롤 화면 하단 배너 */}
       <BannerAd />
 
-      <UnlockModal open={gate} onClose={() => setGate(false)} onUnlocked={() => { setUnlocked(true); setGate(false); }} />
+      <UnlockModal
+        open={gate !== null}
+        onClose={() => setGate(null)}
+        title={gate === "ranking" ? "오늘의 랭킹 열기" : gate === "fun" ? "재미 운세 열기" : "잠긴 운세 풀이"}
+        desc={gate === "ranking"
+          ? <>광고를 보면 오늘의 <b style={{ color: "var(--accent-ink)" }}>띠·별자리 랭킹</b>을<br />확인할 수 있어요.</>
+          : gate === "fun"
+            ? <>광고를 보면 <b style={{ color: "var(--accent-ink)" }}>재미 운세</b>(로또·궁합 등)를<br />즐길 수 있어요.</>
+            : undefined}
+        onUnlocked={() => {
+          if (gate === "ranking") { setUnlockedToday(UNLOCK_RANKING); setGate(null); onNavigate("ranking"); }
+          else if (gate === "fun") { setUnlockedToday(UNLOCK_FUN); setGate(null); onNavigate("fun"); }
+          else { setUnlockedToday(); setUnlocked(true); setGate(null); }
+        }}
+      />
     </>
   );
 }
