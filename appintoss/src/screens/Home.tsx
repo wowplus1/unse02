@@ -97,8 +97,16 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       ) : (
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
-          <div className="card center muted" onClick={() => setGate("detail")} style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16, cursor: "pointer" }}>
-            🔒 광고 보고 <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b>까지 열어보세요
+          <div className="card center" onClick={() => setGate("detail")}
+            style={{ background: "var(--accent-soft)", border: "1px solid var(--accent)", padding: "20px 16px", cursor: "pointer" }}>
+            <div style={{ fontSize: 30, lineHeight: 1 }}>🔒</div>
+            <div style={{ fontWeight: 800, fontSize: 15, marginTop: 8 }}>
+              <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b> 잠금
+            </div>
+            <div className="muted" style={{ fontSize: 12.5, marginTop: 3 }}>광고 보면 오늘 더보기 풀이가 모두 열려요</div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 13, background: "var(--grad-brand)", color: "#201f1e", fontWeight: 800, fontSize: 14, padding: "11px 20px", borderRadius: 13, boxShadow: "0 6px 16px rgba(240,181,63,.35)" }}>
+              🎬 광고 보고 열기
+            </div>
           </div>
         </>
       ))}
