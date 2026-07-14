@@ -116,18 +116,23 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       ))}
 
       <div className="sec">🎁 오늘의 행운템</div>
-      <div className="grid3">
-        <div className="card center" style={{ background: "var(--sky-soft)", border: "none", padding: 14 }}>
-          <div className="muted" style={{ fontSize: 11 }}>행운색</div>
-          <div style={{ fontWeight: 800, fontSize: 14, marginTop: 3 }}>{ft.luck.color}</div>
-        </div>
-        <div className="card center" style={{ background: "var(--butter-soft)", border: "none", padding: 14 }}>
-          <div className="muted" style={{ fontSize: 11 }}>행운수</div>
-          <div style={{ fontWeight: 800, fontSize: 14, marginTop: 3 }}>{ft.luck.num}</div>
-        </div>
-        <div className="card center" style={{ background: "var(--mint-soft)", border: "none", padding: 14 }}>
-          <div className="muted" style={{ fontSize: 11 }}>아이템</div>
-          <div style={{ fontWeight: 800, fontSize: 13, marginTop: 3 }}>{ft.luck.item}</div>
+      <div className="panel" style={{ padding: 12 }}>
+        <div className="grid3" style={{ gap: 9 }}>
+          <div className="card center" style={{ background: "var(--sky-soft)", border: "1px solid var(--line2)", padding: "14px 8px" }}>
+            <div style={{ fontSize: 22, lineHeight: 1 }}>🎨</div>
+            <div className="muted" style={{ fontSize: 11, marginTop: 5, fontWeight: 700 }}>행운색</div>
+            <div style={{ fontWeight: 800, fontSize: 14, marginTop: 2 }}>{ft.luck.color}</div>
+          </div>
+          <div className="card center" style={{ background: "var(--butter-soft)", border: "1px solid var(--line2)", padding: "14px 8px" }}>
+            <div style={{ fontSize: 22, lineHeight: 1 }}>🔢</div>
+            <div className="muted" style={{ fontSize: 11, marginTop: 5, fontWeight: 700 }}>행운수</div>
+            <div style={{ fontWeight: 800, fontSize: 14, marginTop: 2 }}>{ft.luck.num}</div>
+          </div>
+          <div className="card center" style={{ background: "var(--mint-soft)", border: "1px solid var(--line2)", padding: "14px 8px" }}>
+            <div style={{ fontSize: 22, lineHeight: 1 }}>🎁</div>
+            <div className="muted" style={{ fontSize: 11, marginTop: 5, fontWeight: 700 }}>아이템</div>
+            <div style={{ fontWeight: 800, fontSize: 12.5, marginTop: 2 }}>{ft.luck.item}</div>
+          </div>
         </div>
       </div>
 
