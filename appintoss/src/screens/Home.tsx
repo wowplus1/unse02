@@ -5,7 +5,6 @@ import ProfileBar from "../components/ProfileBar";
 import ShareCard from "../components/ShareCard";
 import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
-import UnlockGate from "../components/UnlockGate";
 import UnlockModal from "../components/UnlockModal";
 import BannerAd from "../components/BannerAd";
 import { isUnlockedToday, setUnlockedToday, UNLOCK_RANKING, UNLOCK_FUN } from "../lib/unlock";
@@ -41,20 +40,6 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
           <div className="ico">🎲</div><div className="t">재미 운세</div><div className="d">로또·궁합·바이오리듬</div>
         </button>
       </div>
-
-      {!unlocked ? (
-        <div style={{ marginTop: 12 }}>
-          <UnlockGate onOpen={() => setGate("detail")} />
-        </div>
-      ) : (
-        <div className="card" style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10, background: "var(--soft)", border: "1px solid var(--line2)" }}>
-          <span style={{ fontSize: 20 }}>✅</span>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: 14 }}>오늘 운세 전체 열림</div>
-            <div className="muted" style={{ fontSize: 12 }}>상세 풀이·더보기까지 모두 확인할 수 있어요</div>
-          </div>
-        </div>
-      )}
 
       <div style={{ marginTop: 14 }}><ShareCard data={ft} name={profile.name} /></div>
       <div style={{ marginTop: 12 }}><CaptureShare /></div>
