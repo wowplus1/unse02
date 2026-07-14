@@ -1,5 +1,7 @@
 import type { Profile } from "../lib/appTypes";
 import BannerAd from "../components/BannerAd";
+import CaptureShare from "../components/CaptureShare";
+import { BRAND } from "../lib/brand";
 import { luckyNumbers } from "../lib/fun";
 import { julianOf } from "../lib/tojeong";
 
@@ -31,7 +33,12 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
     const { main } = luckyNumbers(seed);
     const BALL = 58, R = 66, S = 2 * (R + BALL / 2) + 6, c = S / 2;
     result = (
-      <div className="panel">
+      <>
+      <div className="panel" id="lotto-share-card">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12.5, color: "var(--muted)", fontWeight: 700, marginBottom: 10 }}>
+          <span>{BRAND.logo} {BRAND.name}{profile.name ? ` · ${profile.name}님` : ""}</span>
+          <span>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</span>
+        </div>
         <div className="chips"><span className="chip"><b>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</b> 행운 번호</span></div>
         <div style={{ background: "radial-gradient(120% 90% at 50% 0%, var(--card-soft), var(--soft))", borderRadius: 18, border: "1px solid var(--line2)", padding: "16px 12px", marginTop: 8 }}>
           {/* 6개 원형(촘촘) 배치 */}
@@ -48,6 +55,8 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
         </div>
         <div className="note">※ 생년월일과 오늘 날짜로 계산한 행운 번호입니다. 매일 바뀌며 재미로 즐겨주세요.</div>
       </div>
+      <div style={{ marginTop: 12 }}><CaptureShare targetId="lotto-share-card" fileName="행운번호.png" /></div>
+      </>
     );
   }
   return (
