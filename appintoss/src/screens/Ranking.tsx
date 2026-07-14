@@ -24,7 +24,7 @@ export default function Ranking({ profile, onBack }: {
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 0" }}>{now.getMonth() + 1}월 {now.getDate()}일 · 오늘 운세가 좋은 순서</p>
       </section>
 
-      <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+      <div style={{ display: "flex", gap: 14, marginTop: 14 }}>
         {(["ddi", "star"] as const).map((t) => (
           <button key={t} onClick={() => { setTab(t); setOpen(null); }}
             style={{
