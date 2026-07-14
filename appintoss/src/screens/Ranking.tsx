@@ -2,13 +2,12 @@ import { useState } from "react";
 import type { Profile } from "../lib/appTypes";
 import { sajuFrom } from "../lib/profile";
 import { ddiRanking, starRanking, RankRow } from "../lib/funtoday";
-import ProfileBar from "../components/ProfileBar";
 import BannerAd from "../components/BannerAd";
 
 function medal(rank: number) { return rank === 0 ? "🥇" : rank === 1 ? "🥈" : rank === 2 ? "🥉" : `${rank + 1}`; }
 
-export default function Ranking({ profile, onEdit, onDelete, onBack }: {
-  profile: Profile | null; onEdit: () => void; onDelete: () => void; onBack: () => void;
+export default function Ranking({ profile, onBack }: {
+  profile: Profile | null; onEdit?: () => void; onDelete?: () => void; onBack: () => void;
 }) {
   const [tab, setTab] = useState<"ddi" | "star">("ddi");
   const [open, setOpen] = useState<number | null>(null);
@@ -25,12 +24,16 @@ export default function Ranking({ profile, onEdit, onDelete, onBack }: {
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 0" }}>{now.getMonth() + 1}월 {now.getDate()}일 · 오늘 운세가 좋은 순서</p>
       </section>
 
-      {profile && <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />}
-
-      <div className="chips" style={{ marginTop: 12 }}>
+      <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
         {(["ddi", "star"] as const).map((t) => (
-          <button key={t} className="chip" onClick={() => { setTab(t); setOpen(null); }}
-            style={{ cursor: "pointer", ...(tab === t ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent", fontWeight: 700 } : {}) }}>
+          <button key={t} onClick={() => { setTab(t); setOpen(null); }}
+            style={{
+              flex: 1, padding: "14px 0", borderRadius: 15, fontSize: 15.5, fontWeight: 800, cursor: "pointer",
+              border: tab === t ? "none" : "1px solid var(--line2)",
+              background: tab === t ? "var(--grad-brand)" : "var(--card)",
+              color: tab === t ? "#201f1e" : "var(--muted)",
+              boxShadow: tab === t ? "0 6px 16px rgba(240,181,63,.28)" : "none",
+            }}>
             {t === "ddi" ? "🐭 띠별" : "⭐ 별자리"}
           </button>
         ))}
