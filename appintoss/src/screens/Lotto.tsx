@@ -29,13 +29,13 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
     const todayJd = julianOf(now.getFullYear(), now.getMonth() + 1, now.getDate());
     const seed = julianOf(profile.y, profile.m, profile.d, profile.cal) * 31 + todayJd;
     const { main } = luckyNumbers(seed);
-    const S = 224, R = 84, BALL = 48, c = S / 2;
+    const BALL = 58, R = 66, S = 2 * (R + BALL / 2) + 6, c = S / 2;
     result = (
       <div className="panel">
         <div className="chips"><span className="chip"><b>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</b> 행운 번호</span></div>
-        <div style={{ background: "radial-gradient(120% 90% at 50% 0%, var(--card-soft), var(--soft))", borderRadius: 18, border: "1px solid var(--line2)", padding: "18px 12px 20px", marginTop: 8 }}>
-          {/* 6개 원형 배치 */}
-          <div style={{ position: "relative", width: S, height: S, margin: "4px auto" }}>
+        <div style={{ background: "radial-gradient(120% 90% at 50% 0%, var(--card-soft), var(--soft))", borderRadius: 18, border: "1px solid var(--line2)", padding: "16px 12px", marginTop: 8 }}>
+          {/* 6개 원형(촘촘) 배치 */}
+          <div style={{ position: "relative", width: S, height: S, margin: "2px auto" }}>
             {main.map((n, i) => {
               const ang = (-90 + i * 60) * Math.PI / 180;
               const x = c + R * Math.cos(ang) - BALL / 2;
@@ -43,17 +43,7 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
               return <span key={n} style={{ position: "absolute", left: x, top: y }}><Ball n={n} size={BALL} /></span>;
             })}
             {/* 중앙 라벨 */}
-            <div style={{ position: "absolute", left: c - 36, top: c - 36, width: 72, height: 72, borderRadius: "50%", background: "var(--card)", border: "1px solid var(--line2)", boxShadow: "var(--shadow)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ fontSize: 24, lineHeight: 1 }}>🍀</div>
-              <div style={{ fontSize: 9.5, color: "var(--muted)", fontWeight: 800, marginTop: 2 }}>행운번호</div>
-            </div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 11, marginTop: 8, fontSize: 10.5, color: "var(--muted)", flexWrap: "wrap" }}>
-            {[["1–10", "#f4b63e"], ["11–20", "#5aa9e6"], ["21–30", "#ec6b6b"], ["31–40", "#9aa0a6"], ["41–45", "#79c079"]].map(([lab, col]) => (
-              <span key={lab} style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-                <span style={{ width: 9, height: 9, borderRadius: 999, background: col as string }} />{lab}
-              </span>
-            ))}
+            <div style={{ position: "absolute", left: c - 30, top: c - 30, width: 60, height: 60, borderRadius: "50%", background: "var(--card)", border: "1px solid var(--line2)", boxShadow: "var(--shadow)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>🍀</div>
           </div>
         </div>
         <div className="note">※ 생년월일과 오늘 날짜로 계산한 행운 번호입니다. 매일 바뀌며 재미로 즐겨주세요.</div>
