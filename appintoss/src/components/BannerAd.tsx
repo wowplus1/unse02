@@ -4,9 +4,9 @@ import { TossAds } from "@apps-in-toss/web-framework";
 // TODO: 콘솔에서 발급한 실제 배너(리스트형) 광고 그룹 ID로 교체하세요.
 const BANNER_AD_GROUP_ID = "ait-ad-test-banner-list-id";
 
-// 앱인토스 배너 광고. 정책상 '스크롤 되는 화면의 상단/하단'에만 사용 (콘텐츠 하단 권장).
-// 토스 밖(브라우저)·미지원·미설정에서는 자리표시(placeholder)만 노출.
-export default function BannerAd({ label = "광고 배너 자리" }: { label?: string }) {
+// 앱인토스 배너. 정책상 '스크롤 화면의 상/하단'에만 사용.
+// 실제 광고가 붙을 때만 노출 — 미지원/미설정/인벤토리 없음이면 아무것도 안 보임(빈 자리표시 제거).
+export default function BannerAd() {
   const ref = useRef<HTMLDivElement>(null);
   const [attached, setAttached] = useState(false);
 
@@ -15,26 +15,15 @@ export default function BannerAd({ label = "광고 배너 자리" }: { label?: s
     if (!ok || !ref.current) return;
     let cleanup: any;
     try {
-      // ⚠️ 실제 파라미터는 콘솔 광고 ID 발급 + 공식 문서로 최종 확인 필요
       cleanup = (TossAds as any).attachBanner({
         element: ref.current,
         options: { adGroupId: BANNER_AD_GROUP_ID, listType: "card" },
       });
       setAttached(true);
-    } catch (e) { /* 파라미터/미지원 → 자리표시 유지 */ }
+    } catch (e) { /* 미지원/미설정 → 숨김 유지 */ }
     return () => { try { cleanup?.(); } catch {} };
   }, []);
 
-  return (
-    <div className="adslot" ref={ref} role="complementary" aria-label="광고 영역">
-      {!attached && (
-        <>
-          <span className="badge">AD · 광고</span>
-          <span className="ico" aria-hidden>📢</span>
-          <span className="ph">{label}</span>
-          <span className="sub">배너 광고 연동 예정</span>
-        </>
-      )}
-    </div>
-  );
+  // 광고가 실제로 붙었을 때만 영역 차지. 아니면 빈(0높이) 마운트 지점만 유지.
+  return <div ref={ref} role="complementary" aria-label="광고 영역" style={attached ? { margin: "18px 0" } : { height: 0, overflow: "hidden" }} />;
 }
