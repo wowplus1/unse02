@@ -70,7 +70,13 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
             <div className="bar" style={{ margin: "2px 0 8px" }}><div className="fill" style={{ width: `${c.score}%` }} /></div>
             {c.full && (unlocked
               ? <ExpandableText text={c.full} />
-              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span onClick={() => setGate("detail")} style={{ color: "var(--accent-ink)", fontWeight: 700, cursor: "pointer" }}>🔒 상세 풀이는 광고 보고</span></div>
+              : <>
+                  <div className="muted" style={{ fontSize: 13 }}>{c.line}</div>
+                  <button onClick={() => setGate("detail")}
+                    style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 8, background: "var(--accent-soft)", color: "var(--accent-ink)", border: "none", borderRadius: 999, padding: "5px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+                    🔒 상세 풀이는 광고 보고
+                  </button>
+                </>
             )}
           </div>
         ))}
