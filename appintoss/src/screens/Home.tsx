@@ -30,8 +30,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
 
-      <div className="sec">🎉 더 즐기기</div>
-      <div className="grid">
+      <div className="grid" style={{ marginTop: 12 }}>
         <button className="card" onClick={() => onNavigate("ranking")} style={{ textAlign: "left", border: "1px solid var(--line2)", cursor: "pointer" }}>
           <div className="ico">🏆</div><div className="t">오늘의 랭킹</div><div className="d">띠·별자리 순위</div>
         </button>
