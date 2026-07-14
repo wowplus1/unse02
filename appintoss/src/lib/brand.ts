@@ -3,5 +3,5 @@ export const BRAND = {
   name: "인생역점",
   tagline: "매일 만나는 나의 운세",
   logo: "🔮",
-  iconUrl: "https://static.toss.im/appsintoss/58253/07aebdae-90f4-48ed-a7d3-517e383a3805.png",
+  iconUrl: "https://static.toss.im/appsintoss/58253/0f4b2059-873e-4306-8175-e608c1144913.png",
 };
