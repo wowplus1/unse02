@@ -1,5 +1,7 @@
 import type { Profile } from "../lib/appTypes";
 import BannerAd from "../components/BannerAd";
+import CaptureShare from "../components/CaptureShare";
+import { BRAND } from "../lib/brand";
 import { biorhythm } from "../lib/fun";
 
 const SERIES = [
@@ -52,7 +54,12 @@ export default function Bio({ profile, onBack }: { profile: Profile | null; onBa
     const today: Record<string, number> = { physical: b.physical, emotional: b.emotional, intellectual: b.intellectual };
     const avg = Math.round((b.physical + b.emotional + b.intellectual) / 3);
     result = (
-      <div className="panel">
+      <>
+      <div className="panel" id="bio-share-card">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12.5, color: "var(--muted)", fontWeight: 700, marginBottom: 10 }}>
+          <span>{BRAND.logo} {BRAND.name}{profile.name ? ` · ${profile.name}님` : ""}</span>
+          <span>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</span>
+        </div>
         <div className="chips">
           <span className="chip"><b>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</b> 기준</span>
           <span className="chip">태어난 지 <b>{b.days.toLocaleString()}일</b></span>
@@ -77,6 +84,8 @@ export default function Bio({ profile, onBack }: { profile: Profile | null; onBa
 
         <div className="note">※ 생년월일로부터의 경과일을 주기(23·28·33일)로 계산한 사인파입니다.</div>
       </div>
+      <div style={{ marginTop: 12 }}><CaptureShare targetId="bio-share-card" fileName="바이오리듬.png" /></div>
+      </>
     );
   }
   return (
