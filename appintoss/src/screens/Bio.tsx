@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { Profile } from "../lib/appTypes";
 import BannerAd from "../components/BannerAd";
 import CaptureShare from "../components/CaptureShare";
@@ -25,6 +26,35 @@ function BioChart({ days, today }: { days: number; today: Record<string, number>
   const line = (per: number) => pts.map((t) => `${tx(t).toFixed(1)},${vy(val(t, per)).toFixed(1)}`).join(" ");
   const todayX = tx(0), zeroY = vy(0);
 
+  const lineRefs = useRef<(SVGPolylineElement | null)[]>([]);
+  const dotRefs = useRef<(SVGCircleElement | null)[]>([]);
+
+  // 진입 시 곡선을 왼쪽부터 그리고(line-draw) 오늘 점이 톡 튀어나오는 연출
+  useEffect(() => {
+    const reduce = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    lineRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const len = el.getTotalLength();
+      el.style.transition = "none";
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
+      el.getBoundingClientRect(); // reflow
+      el.style.transition = `stroke-dashoffset 1.05s ease ${i * 0.18}s`;
+      el.style.strokeDashoffset = "0";
+    });
+    dotRefs.current.forEach((el, i) => {
+      if (!el) return;
+      el.style.transformBox = "fill-box";
+      el.style.transformOrigin = "center";
+      el.style.transition = "none";
+      el.style.transform = "scale(0)";
+      el.getBoundingClientRect(); // reflow
+      el.style.transition = `transform .42s cubic-bezier(.34,1.56,.64,1) ${0.95 + i * 0.12}s`;
+      el.style.transform = "scale(1)";
+    });
+  }, [days]);
+
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }} role="img" aria-label="바이오리듬 그래프">
       {/* 기준선 (0%) */}
@@ -35,12 +65,12 @@ function BioChart({ days, today }: { days: number; today: Record<string, number>
       <line x1={todayX} y1={padTop} x2={todayX} y2={H - padBot} stroke="var(--accent)" strokeWidth={1.5} strokeDasharray="3 3" />
       <text x={todayX} y={H - 9} fontSize={10} fill="var(--accent-ink)" fontWeight={800} textAnchor="middle">오늘</text>
       {/* 곡선 */}
-      {SERIES.map((s) => (
-        <polyline key={s.key} points={line(s.period)} fill="none" stroke={s.color} strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" opacity={0.95} />
+      {SERIES.map((s, i) => (
+        <polyline key={s.key} ref={(el) => { lineRefs.current[i] = el; }} points={line(s.period)} fill="none" stroke={s.color} strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" opacity={0.95} />
       ))}
       {/* 오늘 지점 점 */}
-      {SERIES.map((s) => (
-        <circle key={s.key} cx={todayX} cy={vy(today[s.key])} r={4.5} fill={s.color} stroke="#fff" strokeWidth={1.5} />
+      {SERIES.map((s, i) => (
+        <circle key={s.key} ref={(el) => { dotRefs.current[i] = el; }} cx={todayX} cy={vy(today[s.key])} r={4.5} fill={s.color} stroke="#fff" strokeWidth={1.5} />
       ))}
     </svg>
   );
