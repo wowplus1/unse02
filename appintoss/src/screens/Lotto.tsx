@@ -28,23 +28,30 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
   if (profile) {
     const todayJd = julianOf(now.getFullYear(), now.getMonth() + 1, now.getDate());
     const seed = julianOf(profile.y, profile.m, profile.d, profile.cal) * 31 + todayJd;
-    const { main, bonus } = luckyNumbers(seed);
+    const { main } = luckyNumbers(seed);
+    const S = 224, R = 84, BALL = 48, c = S / 2;
     result = (
       <div className="panel">
         <div className="chips"><span className="chip"><b>{now.getFullYear()}.{now.getMonth() + 1}.{now.getDate()}</b> 행운 번호</span></div>
-        <div style={{ background: "radial-gradient(120% 90% at 50% 0%, var(--card-soft), var(--soft))", borderRadius: 18, border: "1px solid var(--line2)", padding: "22px 12px 20px", marginTop: 8 }}>
-          <div style={{ display: "flex", gap: 9, flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}>
-            {main.map((n) => <Ball key={n} n={n} />)}
-            <span style={{ fontSize: 24, color: "var(--muted)", fontWeight: 800, margin: "0 1px" }}>＋</span>
-            <span style={{ position: "relative", display: "inline-flex" }}>
-              <Ball n={bonus} bonus />
-              <span style={{ position: "absolute", top: -9, left: "50%", transform: "translateX(-50%)", fontSize: 9, fontWeight: 800, color: "#fff", background: "#c77dff", borderRadius: 999, padding: "1px 6px", whiteSpace: "nowrap", boxShadow: "0 2px 5px rgba(0,0,0,.2)" }}>보너스</span>
-            </span>
+        <div style={{ background: "radial-gradient(120% 90% at 50% 0%, var(--card-soft), var(--soft))", borderRadius: 18, border: "1px solid var(--line2)", padding: "18px 12px 20px", marginTop: 8 }}>
+          {/* 6개 원형 배치 */}
+          <div style={{ position: "relative", width: S, height: S, margin: "4px auto" }}>
+            {main.map((n, i) => {
+              const ang = (-90 + i * 60) * Math.PI / 180;
+              const x = c + R * Math.cos(ang) - BALL / 2;
+              const y = c + R * Math.sin(ang) - BALL / 2;
+              return <span key={n} style={{ position: "absolute", left: x, top: y }}><Ball n={n} size={BALL} /></span>;
+            })}
+            {/* 중앙 라벨 */}
+            <div style={{ position: "absolute", left: c - 36, top: c - 36, width: 72, height: 72, borderRadius: "50%", background: "var(--card)", border: "1px solid var(--line2)", boxShadow: "var(--shadow)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ fontSize: 24, lineHeight: 1 }}>🍀</div>
+              <div style={{ fontSize: 9.5, color: "var(--muted)", fontWeight: 800, marginTop: 2 }}>행운번호</div>
+            </div>
           </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 16, fontSize: 10.5, color: "var(--muted)", flexWrap: "wrap" }}>
-            {[["1–10", "#f4b63e"], ["11–20", "#5aa9e6"], ["21–30", "#ec6b6b"], ["31–40", "#9aa0a6"], ["41–45", "#79c079"]].map(([lab, c]) => (
+          <div style={{ display: "flex", justifyContent: "center", gap: 11, marginTop: 8, fontSize: 10.5, color: "var(--muted)", flexWrap: "wrap" }}>
+            {[["1–10", "#f4b63e"], ["11–20", "#5aa9e6"], ["21–30", "#ec6b6b"], ["31–40", "#9aa0a6"], ["41–45", "#79c079"]].map(([lab, col]) => (
               <span key={lab} style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-                <span style={{ width: 9, height: 9, borderRadius: 999, background: c as string }} />{lab}
+                <span style={{ width: 9, height: 9, borderRadius: 999, background: col as string }} />{lab}
               </span>
             ))}
           </div>
@@ -58,7 +65,7 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
       <button className="back" onClick={onBack}>← 재미</button>
       <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>🔢 행운의 번호</h2>
-        <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>생년월일로 오늘의 로또 번호(6+보너스)를 뽑아요</p>
+        <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>생년월일로 오늘의 행운 번호 6개를 뽑아요</p>
       </section>
       {result || <div className="panel center muted">먼저 <b>오늘</b> 탭에서 생년월일을 등록해 주세요.</div>}
       <BannerAd />
