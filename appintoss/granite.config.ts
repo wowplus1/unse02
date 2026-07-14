@@ -17,8 +17,7 @@ export default defineConfig({
   outdir: 'dist',
   brand: {
     displayName: '인생역점',
-    // TODO: 앱인토스 콘솔에 업로드한 실제 아이콘 URL로 교체
-    icon: 'https://static.toss.im/appsintoss/73/10550764-5ac1-44e2-9ff3-ad78d8d2e71a.png',
+    icon: 'https://static.toss.im/appsintoss/58253/07aebdae-90f4-48ed-a7d3-517e383a3805.png',
     primaryColor: '#7b5cff',
     bridgeColorMode: 'inverted',
   },
