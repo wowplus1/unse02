@@ -6,6 +6,7 @@ import ShareCard from "../components/ShareCard";
 import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
 import UnlockGate from "../components/UnlockGate";
+import UnlockModal from "../components/UnlockModal";
 import BannerAd from "../components/BannerAd";
 import { isUnlockedToday } from "../lib/unlock";
 
@@ -14,6 +15,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 }) {
   const ft = funToday(profile);
   const [unlocked, setUnlocked] = useState(() => isUnlockedToday());
+  const [gate, setGate] = useState(false);
   return (
     <>
       <section style={{ padding: "10px 2px 6px" }}>
@@ -36,7 +38,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 
       {!unlocked ? (
         <div style={{ marginTop: 12 }}>
-          <UnlockGate onUnlock={() => setUnlocked(true)} />
+          <UnlockGate onOpen={() => setGate(true)} />
         </div>
       ) : (
         <div className="card" style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10, background: "var(--soft)", border: "1px solid var(--line2)" }}>
@@ -62,7 +64,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
             <div className="bar" style={{ margin: "2px 0 8px" }}><div className="fill" style={{ width: `${c.score}%` }} /></div>
             {c.full && (unlocked
               ? <ExpandableText text={c.full} />
-              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span style={{ color: "var(--accent-ink)", fontWeight: 700 }}>🔒 상세 풀이는 광고 보고</span></div>
+              : <div className="muted" style={{ fontSize: 13 }}>{c.line} <span onClick={() => setGate(true)} style={{ color: "var(--accent-ink)", fontWeight: 700, cursor: "pointer" }}>🔒 상세 풀이는 광고 보고</span></div>
             )}
           </div>
         ))}
@@ -83,7 +85,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       ) : (
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
-          <div className="card center muted" style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16 }}>
+          <div className="card center muted" onClick={() => setGate(true)} style={{ background: "var(--soft)", border: "1px dashed var(--line2)", fontSize: 13, padding: 16, cursor: "pointer" }}>
             🔒 광고 보고 <b style={{ color: "var(--accent-ink)" }}>{ft.more.map((m) => m.label).join(" · ")}</b>까지 열어보세요
           </div>
         </>
@@ -107,6 +109,8 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
 
       {/* 정책: 스크롤 화면 하단 배너 */}
       <BannerAd />
+
+      <UnlockModal open={gate} onClose={() => setGate(false)} onUnlocked={() => { setUnlocked(true); setGate(false); }} />
     </>
   );
 }
