@@ -9,13 +9,14 @@ export default function ExpandableText({ text, clamp = 48 }: { text: string; cla
 
   if (!needToggle) return <div className="b">{text}</div>;
 
+  // 본문(또는 더보기 버튼) 어디를 눌러도 펼침/접힘
   return (
-    <div>
+    <div onClick={() => setOpen((v) => !v)} style={{ cursor: "pointer" }}>
       <div className="b" style={{ whiteSpace: "pre-wrap" }}>
         {open ? text : compact.slice(0, clamp) + "…"}
       </div>
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={(e) => { e.stopPropagation(); setOpen((v) => !v); }}
         style={{ background: "none", border: "none", color: "var(--accent-ink)", fontWeight: 700, fontSize: 12.5, cursor: "pointer", padding: "6px 0 0" }}
       >
         {open ? "접기 ▲" : "더보기 ▼"}
