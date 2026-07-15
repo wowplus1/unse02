@@ -17,7 +17,7 @@ export default defineConfig({
   outdir: 'dist',
   brand: {
     displayName: '인생역점',
-    icon: 'https://static.toss.im/appsintoss/60161/a769d6c1-5071-4e72-840c-52d849fcc2d3.png',
+    icon: 'https://static.toss.im/appsintoss/60161/02d3926b-efa5-4393-912a-4758a812acdc.png',
     primaryColor: '#7b5cff',
     bridgeColorMode: 'inverted',
   },

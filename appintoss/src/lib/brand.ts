@@ -5,5 +5,5 @@ export const BRAND = {
   logo: "🔮",
   // 앱인토스 콘솔의 앱 식별자 — granite.config.ts의 appName과 반드시 동일해야 함
   appName: "unse4uu",
-  iconUrl: "https://static.toss.im/appsintoss/60161/a769d6c1-5071-4e72-840c-52d849fcc2d3.png",
+  iconUrl: "https://static.toss.im/appsintoss/60161/02d3926b-efa5-4393-912a-4758a812acdc.png",
 };
