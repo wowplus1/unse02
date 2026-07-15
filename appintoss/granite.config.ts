@@ -1,7 +1,7 @@
 import { defineConfig } from '@apps-in-toss/web-framework/config';
 
 export default defineConfig({
-  appName: 'unse4u',
+  appName: 'unse4uu',
   web: {
     // 실기(폰) 테스트: 내 PC의 같은 Wi-Fi IP로 교체하세요.
     // (터미널에서 rsbuild가 출력하는 Network 주소, 또는 ipconfig의 IPv4 주소)
@@ -17,7 +17,7 @@ export default defineConfig({
   outdir: 'dist',
   brand: {
     displayName: '인생역점',
-    icon: 'https://static.toss.im/appsintoss/58253/0f4b2059-873e-4306-8175-e608c1144913.png',
+    icon: 'https://static.toss.im/appsintoss/60161/a769d6c1-5071-4e72-840c-52d849fcc2d3.png',
     primaryColor: '#7b5cff',
     bridgeColorMode: 'inverted',
   },

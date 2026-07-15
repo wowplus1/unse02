@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { toBlob } from "html-to-image";
 import { share, getTossShareLink } from "@apps-in-toss/web-framework";
+import { BRAND } from "../lib/brand";
 
 // 공유 카드(#targetId)를 PNG로 캡처. '📤 공유'는 앱인토스 네이티브 공유 시트(카톡·인스타 등),
 // '💾 저장'은 이미지 다운로드. (네이티브 공유는 텍스트/링크 기반이라 링크 공유로 동작)
@@ -34,7 +35,7 @@ export default function CaptureShare({ targetId = "share-card", fileName = "오�
     setBusy(true); setMsg("");
     try {
       let link = "";
-      try { link = await getTossShareLink("intoss://unse4u"); } catch {}
+      try { link = await getTossShareLink(`intoss://${BRAND.appName}`); } catch {}
       const message = link ? `${shareText}\n👉 ${link}` : shareText;
       await share({ message });
     } catch {

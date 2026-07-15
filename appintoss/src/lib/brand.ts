@@ -3,5 +3,7 @@ export const BRAND = {
   name: "인생역점",
   tagline: "매일 만나는 나의 운세",
   logo: "🔮",
-  iconUrl: "https://static.toss.im/appsintoss/58253/0f4b2059-873e-4306-8175-e608c1144913.png",
+  // 앱인토스 콘솔의 앱 식별자 — granite.config.ts의 appName과 반드시 동일해야 함
+  appName: "unse4uu",
+  iconUrl: "https://static.toss.im/appsintoss/60161/a769d6c1-5071-4e72-840c-52d849fcc2d3.png",
 };
