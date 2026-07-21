@@ -26,7 +26,7 @@ function Ball({ n, size = 46 }: { n: number; size?: number }) {
 
 const rnd = () => 1 + Math.floor(Math.random() * 45);
 
-export default function Lotto({ profile, onBack }: { profile: Profile | null; onBack: () => void }) {
+export default function Lotto({ profile }: { profile: Profile | null }) {
   const now = new Date();
   const main = useMemo<number[]>(() => {
     if (!profile) return [];
@@ -100,9 +100,7 @@ export default function Lotto({ profile, onBack }: { profile: Profile | null; on
     );
   }
   return (
-    <>
-      <button className="back" onClick={onBack}>← 재미</button>
-      <section style={{ padding: "2px 2px 4px" }}>
+    <>      <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>🔢 행운의 번호</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>생년월일로 오늘의 행운 번호 6개를 뽑아요</p>
       </section>

@@ -12,14 +12,12 @@ function verdict(s: number) {
   return "서로 다른 매력, 조심스러운 사이예요 😬";
 }
 
-export default function NameScreen({ onBack }: { onBack: () => void }) {
+export default function NameScreen() {
   const [a, setA] = useState(""); const [b, setB] = useState("");
   const [res, setRes] = useState<number | null>(null);
   const go = () => { if (a.trim() && b.trim()) setRes(nameCompat(a.trim(), b.trim())); };
   return (
-    <>
-      <button className="back" onClick={onBack}>← 재미</button>
-      <section style={{ padding: "2px 2px 4px" }}>
+    <>      <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>💑 이름 궁합</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 8px" }}>두 사람의 이름으로 궁합 점수를 봐요</p>
       </section>

@@ -25,7 +25,7 @@ function Fields({ label, val, set }: { label: string; val: Person; set: (p: Pers
   );
 }
 
-export default function Gunghap({ onBack }: { onBack: () => void }) {
+export default function Gunghap() {
   const [a, setA] = useState<Person>(empty);
   const [b, setB] = useState<Person>(empty);
   const [show, setShow] = useState(false);
@@ -59,9 +59,7 @@ export default function Gunghap({ onBack }: { onBack: () => void }) {
   }
 
   return (
-    <>
-      <button className="back" onClick={onBack}>← 재미</button>
-      <section style={{ padding: "2px 2px 8px" }}>
+    <>      <section style={{ padding: "2px 2px 8px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>💞 궁합 보기</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 0" }}>두 사람의 생년월일로 오행·띠 궁합</p>
       </section>

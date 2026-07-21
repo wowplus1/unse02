@@ -44,7 +44,6 @@ export default function App() {
   };
   const nav = (v: View) => { setView(v); setEditing(false); window.scrollTo(0, 0); };
   const onEdit = () => setEditing(true);
-  const toFun = () => nav("fun");
 
   // 랭킹·재미 진입은 오늘 미언락이면 광고 게이트, 아니면 바로 이동. (홈·재미 하위 화면은 그대로 통과)
   const openView = (target: View) => {
@@ -83,19 +82,22 @@ export default function App() {
       case "home": content = <Home profile={profile!} onEdit={onEdit} onDelete={deleteProfile} onNavigate={openView} />; break;
       case "ranking": content = <Ranking profile={profile} />; break;
       case "fun": content = <Fun onNavigate={openView} />; break;
-      case "lotto": content = <Lotto profile={profile} onBack={toFun} />; break;
-      case "bio": content = <Bio profile={profile} onBack={toFun} />; break;
-      case "name": content = <NameScreen onBack={toFun} />; break;
-      case "gunghap": content = <Gunghap onBack={toFun} />; break;
-      case "juyeok": content = <Juyeok profile={profile} onBack={toFun} />; break;
+      case "lotto": content = <Lotto profile={profile} />; break;
+      case "bio": content = <Bio profile={profile} />; break;
+      case "name": content = <NameScreen />; break;
+      case "gunghap": content = <Gunghap />; break;
+      case "juyeok": content = <Juyeok profile={profile} />; break;
     }
   }
 
-  const showTopNav = !editing && !!profile && (view === "ranking" || view === "fun");
+  // 재미 섹션(허브 + 하위 화면)에서는 '재미 운세' 탭을 활성화
+  const FUN_VIEWS: View[] = ["fun", "lotto", "bio", "name", "gunghap", "juyeok"];
+  const showTopNav = !editing && !!profile && (view === "ranking" || FUN_VIEWS.includes(view));
+  const topNavCurrent: View = FUN_VIEWS.includes(view) ? "fun" : view;
 
   return (
     <div className="wrap">
-      {showTopNav && <TopNav current={view} onNav={openView} />}
+      {showTopNav && <TopNav current={topNavCurrent} onNav={openView} />}
       <main key={editing ? "edit" : view} className="page">{content}</main>
 
       <UnlockModal

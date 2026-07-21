@@ -25,7 +25,7 @@ function LineRow({ yang }: { yang: boolean }) {
   );
 }
 
-export default function Juyeok({ profile, onBack }: { profile: Profile | null; onBack: () => void }) {
+export default function Juyeok({ profile }: { profile: Profile | null }) {
   // 하루 한 번 고정: 사람+날짜로 시드해 오늘의 괘를 결정. (다시 뽑기 없음 — 운세의 근본 유지)
   const { hex, readings, gn, gang } = useMemo(() => {
     const now = new Date();
@@ -38,9 +38,7 @@ export default function Juyeok({ profile, onBack }: { profile: Profile | null; o
   }, [profile]);
 
   return (
-    <>
-      <button className="back" onClick={onBack}>← 재미</button>
-      <section style={{ padding: "2px 2px 4px" }}>
+    <>      <section style={{ padding: "2px 2px 4px" }}>
         <h2 style={{ fontSize: 23, margin: 0, letterSpacing: "-0.03em", fontWeight: 800 }}>☯️ 주역 점보기</h2>
         <p className="muted" style={{ fontSize: 13, margin: "4px 0 0" }}>생년월일과 날짜로 세운 오늘의 괘 (하루 1회)</p>
       </section>
