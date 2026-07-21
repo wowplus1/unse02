@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Profile, PROFILE_KEY, View } from "./lib/appTypes";
 import { BRAND } from "./lib/brand";
+import { isUnlockedToday, setUnlockedToday, UNLOCK_RANKING, UNLOCK_FUN } from "./lib/unlock";
 import ProfileForm from "./components/ProfileForm";
+import TopNav from "./components/TopNav";
+import UnlockModal from "./components/UnlockModal";
 import Home from "./screens/Home";
 import Ranking from "./screens/Ranking";
 import Fun from "./screens/Fun";
@@ -23,6 +26,7 @@ export default function App() {
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<View>("home");
   const [editing, setEditing] = useState(false);
+  const [navGate, setNavGate] = useState<null | "ranking" | "fun">(null);
 
   useEffect(() => {
     try { const s = localStorage.getItem(PROFILE_KEY); if (s) setProfile(JSON.parse(s)); } catch {}
@@ -41,6 +45,13 @@ export default function App() {
   const nav = (v: View) => { setView(v); setEditing(false); window.scrollTo(0, 0); };
   const onEdit = () => setEditing(true);
   const toFun = () => nav("fun");
+
+  // 랭킹·재미 진입은 오늘 미언락이면 광고 게이트, 아니면 바로 이동. (홈·재미 하위 화면은 그대로 통과)
+  const openView = (target: View) => {
+    if (target === "ranking" && !isUnlockedToday(UNLOCK_RANKING)) { setNavGate("ranking"); return; }
+    if (target === "fun" && !isUnlockedToday(UNLOCK_FUN)) { setNavGate("fun"); return; }
+    nav(target);
+  };
 
   let content: React.ReactNode = null;
   if (!ready) {
@@ -69,9 +80,9 @@ export default function App() {
     );
   } else {
     switch (view) {
-      case "home": content = <Home profile={profile!} onEdit={onEdit} onDelete={deleteProfile} onNavigate={nav} />; break;
-      case "ranking": content = <Ranking profile={profile} onEdit={onEdit} onDelete={deleteProfile} onBack={() => nav("home")} />; break;
-      case "fun": content = <Fun onNavigate={nav} onBack={() => nav("home")} />; break;
+      case "home": content = <Home profile={profile!} onEdit={onEdit} onDelete={deleteProfile} onNavigate={openView} />; break;
+      case "ranking": content = <Ranking profile={profile} />; break;
+      case "fun": content = <Fun onNavigate={openView} />; break;
       case "lotto": content = <Lotto profile={profile} onBack={toFun} />; break;
       case "bio": content = <Bio profile={profile} onBack={toFun} />; break;
       case "name": content = <NameScreen onBack={toFun} />; break;
@@ -80,10 +91,25 @@ export default function App() {
     }
   }
 
+  const showTopNav = !editing && !!profile && (view === "ranking" || view === "fun");
+
   return (
     <div className="wrap">
-      {/* 상단 헤더는 토스가 서비스 타이틀을 제공하므로 제거 */}
+      {showTopNav && <TopNav current={view} onNav={openView} />}
       <main key={editing ? "edit" : view} className="page">{content}</main>
+
+      <UnlockModal
+        open={navGate !== null}
+        onClose={() => setNavGate(null)}
+        title={navGate === "ranking" ? "오늘의 랭킹 열기" : "재미 운세 열기"}
+        desc={navGate === "ranking"
+          ? <>광고를 보면 오늘의 <b style={{ color: "var(--accent-ink)" }}>띠·별자리 랭킹</b>을<br />확인할 수 있어요.</>
+          : <>광고를 보면 <b style={{ color: "var(--accent-ink)" }}>재미 운세</b>(로또·궁합 등)를<br />즐길 수 있어요.</>}
+        onUnlocked={() => {
+          if (navGate === "ranking") { setUnlockedToday(UNLOCK_RANKING); setNavGate(null); nav("ranking"); }
+          else if (navGate === "fun") { setUnlockedToday(UNLOCK_FUN); setNavGate(null); nav("fun"); }
+        }}
+      />
     </div>
   );
 }

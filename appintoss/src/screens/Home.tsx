@@ -7,20 +7,14 @@ import CaptureShare from "../components/CaptureShare";
 import ExpandableText from "../components/ExpandableText";
 import UnlockModal from "../components/UnlockModal";
 import BannerAd from "../components/BannerAd";
-import { isUnlockedToday, setUnlockedToday, UNLOCK_RANKING, UNLOCK_FUN } from "../lib/unlock";
-
-type Gate = null | "detail" | "ranking" | "fun";
+import { isUnlockedToday, setUnlockedToday } from "../lib/unlock";
 
 export default function Home({ profile, onEdit, onDelete, onNavigate }: {
   profile: Profile; onEdit: () => void; onDelete: () => void; onNavigate: (v: View) => void;
 }) {
   const ft = funToday(profile);
   const [unlocked, setUnlocked] = useState(() => isUnlockedToday());
-  const [gate, setGate] = useState<Gate>(null);
-
-  // 오늘 이미 언락했으면 바로 이동, 아니면 광고 팝업
-  const goRanking = () => (isUnlockedToday(UNLOCK_RANKING) ? onNavigate("ranking") : setGate("ranking"));
-  const goFun = () => (isUnlockedToday(UNLOCK_FUN) ? onNavigate("fun") : setGate("fun"));
+  const [detailGate, setDetailGate] = useState(false);
   return (
     <>
       <section style={{ padding: "10px 2px 6px" }}>
@@ -33,14 +27,14 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       <ProfileBar profile={profile} onEdit={onEdit} onDelete={onDelete} />
 
       <div className="grid" style={{ marginTop: 12 }}>
-        <button className="card" onClick={goRanking}
+        <button className="card" onClick={() => onNavigate("ranking")}
           style={{ textAlign: "left", border: "none", cursor: "pointer", color: "#3a2c0c", position: "relative", background: "linear-gradient(145deg,#ffe09a,#f4bd4e)", boxShadow: "0 7px 18px rgba(240,181,63,.32)" }}>
           <div style={{ fontSize: 26, width: 52, height: 52, borderRadius: 16, background: "rgba(255,255,255,.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>🏆</div>
           <div style={{ fontWeight: 800, fontSize: 16, marginTop: 12, letterSpacing: "-0.02em" }}>오늘의 랭킹</div>
           <div style={{ fontSize: 12.5, marginTop: 3, opacity: .72 }}>띠·별자리 순위</div>
           <span style={{ position: "absolute", top: 16, right: 16, fontSize: 17, fontWeight: 800, opacity: .55 }}>→</span>
         </button>
-        <button className="card" onClick={goFun}
+        <button className="card" onClick={() => onNavigate("fun")}
           style={{ textAlign: "left", border: "none", cursor: "pointer", color: "#3a1f12", position: "relative", background: "linear-gradient(145deg,#f7bda2,#ec8f6f)", boxShadow: "0 7px 18px rgba(236,143,111,.32)" }}>
           <div style={{ fontSize: 26, width: 52, height: 52, borderRadius: 16, background: "rgba(255,255,255,.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>🎲</div>
           <div style={{ fontWeight: 800, fontSize: 16, marginTop: 12, letterSpacing: "-0.02em" }}>재미 운세</div>
@@ -66,7 +60,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
               ? <ExpandableText text={c.full} />
               : <>
                   <div className="muted" style={{ fontSize: 13 }}>{c.line}</div>
-                  <button onClick={() => setGate("detail")}
+                  <button onClick={() => setDetailGate(true)}
                     style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 8, background: "var(--accent-soft)", color: "var(--accent-ink)", border: "none", borderRadius: 999, padding: "5px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
                     🔒 상세 풀이는 광고 보고
                   </button>
@@ -94,7 +88,7 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       ) : (
         <>
           <div className="sec">📖 오늘의 운세 더보기</div>
-          <div className="card center" onClick={() => setGate("detail")}
+          <div className="card center" onClick={() => setDetailGate(true)}
             style={{ background: "var(--accent-soft)", border: "1px solid var(--accent)", padding: "20px 16px", cursor: "pointer" }}>
             <div style={{ fontSize: 30, lineHeight: 1 }}>🔒</div>
             <div style={{ fontWeight: 800, fontSize: 15, marginTop: 8 }}>
@@ -133,19 +127,9 @@ export default function Home({ profile, onEdit, onDelete, onNavigate }: {
       <BannerAd />
 
       <UnlockModal
-        open={gate !== null}
-        onClose={() => setGate(null)}
-        title={gate === "ranking" ? "오늘의 랭킹 열기" : gate === "fun" ? "재미 운세 열기" : "잠긴 운세 풀이"}
-        desc={gate === "ranking"
-          ? <>광고를 보면 오늘의 <b style={{ color: "var(--accent-ink)" }}>띠·별자리 랭킹</b>을<br />확인할 수 있어요.</>
-          : gate === "fun"
-            ? <>광고를 보면 <b style={{ color: "var(--accent-ink)" }}>재미 운세</b>(로또·궁합 등)를<br />즐길 수 있어요.</>
-            : undefined}
-        onUnlocked={() => {
-          if (gate === "ranking") { setUnlockedToday(UNLOCK_RANKING); setGate(null); onNavigate("ranking"); }
-          else if (gate === "fun") { setUnlockedToday(UNLOCK_FUN); setGate(null); onNavigate("fun"); }
-          else { setUnlockedToday(); setUnlocked(true); setGate(null); }
-        }}
+        open={detailGate}
+        onClose={() => setDetailGate(false)}
+        onUnlocked={() => { setUnlockedToday(); setUnlocked(true); setDetailGate(false); }}
       />
     </>
   );
