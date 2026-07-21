@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { TossAds } from "@apps-in-toss/web-framework";
+import { AD_BANNER_ID } from "../lib/ads";
 
-// TODO: 콘솔에서 발급한 실제 배너(리스트형) 광고 그룹 ID로 교체하세요.
-const BANNER_AD_GROUP_ID = "ait-ad-test-banner-list-id";
+const BANNER_AD_GROUP_ID = AD_BANNER_ID;
 
 // 앱인토스 배너. 정책상 '스크롤 화면의 상/하단'에만 사용.
 // 실제 광고가 붙을 때만 노출 — 미지원/미설정/인벤토리 없음이면 아무것도 안 보임(빈 자리표시 제거).
